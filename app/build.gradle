@@ -1,5 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion 28
@@ -29,18 +31,23 @@ dependencies {
 
     // room persistence library
     implementation "androidx.room:room-runtime:2.1.0-alpha02"
-    annotationProcessor "androidx.room:room-compiler:2.1.0-alpha02"
+    kapt "androidx.room:room-compiler:2.1.0-alpha02"
     testImplementation "androidx.room:room-testing:2.1.0-alpha02"
 
     // viewmodel and livedata
     implementation "androidx.lifecycle:lifecycle-extensions:2.0.0"
-    annotationProcessor "androidx.lifecycle:lifecycle-compiler:2.0.0"
+    kapt "androidx.lifecycle:lifecycle-compiler:2.0.0"
     testImplementation "androidx.arch.core:core-testing:2.0.0"
 
+    // kotlin anko
+    implementation "org.jetbrains.anko:anko-commons:$anko_version"
+
+    // unit testing
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.1.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0'
 }
+
 repositories {
     mavenCentral()
 }

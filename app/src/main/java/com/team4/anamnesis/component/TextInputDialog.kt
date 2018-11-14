@@ -1,4 +1,4 @@
-package com.team4.anamnesis.components
+package com.team4.anamnesis.component
 
 import android.content.Context
 import android.text.InputType
@@ -6,6 +6,7 @@ import androidx.appcompat.app.AlertDialog
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import com.team4.anamnesis.R
+import com.team4.anamnesis.utils.ScreenUtils
 
 abstract class TextInputDialogCancelledListener {
     abstract fun onCancelled()
@@ -63,11 +64,15 @@ class TextInputDialog(context: Context, title: Int, hint: Int) {
         // set the dialog's title
         builder.setTitle(title)
 
-        // build the input EditText
+        // configure the input EditText
         input.inputType = InputType.TYPE_CLASS_TEXT
         input.hint = context.resources.getString(hint)
-        inputLayout.isErrorEnabled = true
         inputLayout.addView(input)
+
+        // configure the InputLayout around the EditText
+        val layoutPadding: Int = ScreenUtils.pxToDp(context, 16)
+        inputLayout.setPadding(layoutPadding, 0, layoutPadding, 0)
+        inputLayout.isErrorEnabled = true
         builder.setView(inputLayout)
 
         // create positive action button

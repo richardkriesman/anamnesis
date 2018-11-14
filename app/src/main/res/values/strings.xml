@@ -9,10 +9,20 @@
     <string name="welcome">Welcome to Anamnesis</string>
     <string name="settings_title">Settings</string>
 
-    <string name="home_dialog_new_deck_title">New flashcard deck</string>
-    <string name="home_dialog_new_deck_hint">Name</string>
-    <string name="home_snackbar_new_deck">Created flashcard deck "%1$s"</string>
+    <string name="drawer_settings">Settings</string>
+
+    <string name="home_dialog_new_group_title">New group</string>
+    <string name="home_dialog_new_group_hint">Name</string>
+    <string name="home_dialog_rename_group_title">Rename group</string>
+    <string name="home_snackbar_new_group">Created group "%1$s"</string>
+    <string name="home_snackbar_renamed_group">Renamed group "%1$s" to "%2$s"</string>
+    <string name="home_snackbar_deleted_group">Deleted group "%1$s"</string>
+    <string name="home_snackbar_deleted_group_action">Undo</string>
 
     <string name="textinputdialog_button_negative">Cancel</string>
     <string name="textinputdialog_button_positive">OK</string>
+    <string name="title_activity_group">Flashcard Deck Group</string>
+
+    <string name="item_group_rename">Rename</string>
+    <string name="item_group_delete">Delete group</string>
 </resources>
