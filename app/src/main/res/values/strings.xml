@@ -146,6 +146,7 @@
     <string name="edit_empty_subtitle">Add a flashcard and it will show up here.</string>
     <string name="edit_snackbar_card_added">Added flashcard</string>
     <string name="edit_snackbar_card_deleted">Deleted flashcard</string>
+    <string name="edit_scroll_indicator_text">"%1$s" / "%2$s"</string>
 
 
 </resources>

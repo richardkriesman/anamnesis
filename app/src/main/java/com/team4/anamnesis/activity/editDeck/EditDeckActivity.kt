@@ -3,6 +3,7 @@ package com.team4.anamnesis.activity.editDeck
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
@@ -13,6 +14,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 import com.team4.anamnesis.R
 import com.team4.anamnesis.component.LinearPageHelper
+import com.team4.anamnesis.component.LinearPageLayoutManager
 import com.team4.anamnesis.db.entity.Deck
 import com.team4.anamnesis.db.entity.Flashcard
 import org.jetbrains.anko.doAsync
@@ -23,10 +25,13 @@ class EditDeckActivity : AppCompatActivity() {
     private lateinit var deck: Deck
     private lateinit var emptyTitle: TextView
     private lateinit var emptySubtitle: TextView
-    private val manager: LinearLayoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL,
+    private val manager: LinearPageLayoutManager = LinearPageLayoutManager(this, LinearLayoutManager.HORIZONTAL,
             false)
+    private lateinit var leftButton: ImageView
     private lateinit var model: EditDeckModel
     private lateinit var recyclerView: RecyclerView
+    private lateinit var rightButton: ImageView
+    private lateinit var scrollIndicator: TextView
 
     override fun onBackPressed() {
         finish()
@@ -47,6 +52,9 @@ class EditDeckActivity : AppCompatActivity() {
         recyclerView = findViewById(R.id.edit_recyclerview)
         emptySubtitle = findViewById(R.id.edit_empty_subtitle)
         emptyTitle = findViewById(R.id.edit_empty_title)
+        leftButton = findViewById(R.id.edit_left_button)
+        rightButton = findViewById(R.id.edit_right_button)
+        scrollIndicator = findViewById(R.id.edit_scroll_indicator)
 
         // instantiate ViewModel
         model = ViewModelProviders.of(this).get(EditDeckModel::class.java)
@@ -58,10 +66,32 @@ class EditDeckActivity : AppCompatActivity() {
             onCreateFlashcardClicked(view)
         }
 
-        // instantiate recyclerview
+        // handle left button click
+        leftButton.setOnClickListener {
+            val currentItem: Int = manager.findFirstCompletelyVisibleItemPosition()
+            if (currentItem - 1 >= 0) {
+                recyclerView.smoothScrollToPosition(currentItem - 1)
+            }
+        }
+
+        // handle right button click
+        rightButton.setOnClickListener {
+            val currentItem: Int = manager.findFirstCompletelyVisibleItemPosition()
+            if (currentItem + 1 < adapter.itemCount) {
+                recyclerView.smoothScrollToPosition(currentItem + 1)
+            }
+        }
+
+        // instantiate RecyclerView
         recyclerView.adapter = adapter
         recyclerView.layoutManager = manager
         LinearPageHelper().attachToRecyclerView(recyclerView)
+
+        // handle RecyclerView page changes
+        manager.onPageChange = {
+            scrollIndicator.text = String.format(resources.getString(R.string.edit_scroll_indicator_text), it + 1,
+                    adapter.itemCount)
+        }
 
         // handle flashcard changes
         adapter.onFlashcardChanged = {
@@ -81,12 +111,22 @@ class EditDeckActivity : AppCompatActivity() {
             if (it.isEmpty()) {
                 emptyTitle.visibility = View.VISIBLE
                 emptySubtitle.visibility = View.VISIBLE
+                leftButton.visibility = View.GONE
                 recyclerView.visibility = View.GONE
+                rightButton.visibility = View.GONE
+                scrollIndicator.visibility = View.GONE
             } else {
                 emptyTitle.visibility = View.GONE
                 emptySubtitle.visibility = View.GONE
+                leftButton.visibility = View.VISIBLE
                 recyclerView.visibility = View.VISIBLE
+                rightButton.visibility = View.VISIBLE
+                scrollIndicator.visibility = View.VISIBLE
             }
+
+            // initialize scroll indicator text
+            scrollIndicator.text = String.format(resources.getString(R.string.edit_scroll_indicator_text),
+                    manager.currentPosition + 1, adapter.itemCount)
         })
 
     }

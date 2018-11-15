@@ -10,11 +10,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.team4.anamnesis.R
 import com.team4.anamnesis.db.entity.Flashcard
-import kotlinx.android.synthetic.main.nav_header_main.view.*
 
 class EditDeckAdapter(context: AppCompatActivity): RecyclerView.Adapter<EditDeckAdapter.EditDeckHolder>() {
-    private val c: AppCompatActivity = context
 
+
+    private val c: AppCompatActivity = context
     private var flashcards: List<Flashcard> = ArrayList() // list of flashcards
 
     /**
@@ -77,7 +77,7 @@ class EditDeckAdapter(context: AppCompatActivity): RecyclerView.Adapter<EditDeck
 
             // handle bottom text change
             bottomText.setOnFocusChangeListener { _, isFocused ->
-                if (!isFocused) {
+                if (!isFocused) {8
                     flashcard.backText = bottomText.text.toString()
                     onFlashcardChanged?.invoke(flashcard)
                 }
