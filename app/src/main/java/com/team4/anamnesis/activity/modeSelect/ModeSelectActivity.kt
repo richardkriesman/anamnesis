@@ -7,8 +7,15 @@ import android.widget.Button
 import android.widget.RadioGroup
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.LiveData
 import com.team4.anamnesis.R
+import com.team4.anamnesis.activity.study.StudyActivity
+import com.team4.anamnesis.activity.study.StudyMode
+import com.team4.anamnesis.db.AppDatabase
 import com.team4.anamnesis.db.entity.Deck
+import com.team4.anamnesis.db.entity.Flashcard
+import org.jetbrains.anko.doAsync
+import org.jetbrains.anko.uiThread
 
 class ModeSelectActivity : AppCompatActivity() {
 
@@ -24,7 +31,7 @@ class ModeSelectActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_study_mode)
+        setContentView(R.layout.activity_mode_select)
         actionBar?.setDisplayHomeAsUpEnabled(true)
 
         // extract deck from intent
@@ -57,18 +64,13 @@ class ModeSelectActivity : AppCompatActivity() {
 
         // handle start button
         startButton.setOnClickListener {
-            val intent = Intent(this, null) // TODO: Change null to study activity
+            val intent = Intent(this, StudyActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK.or(Intent.FLAG_ACTIVITY_CLEAR_TASK)
+            intent.putExtra("deck", deck)
             when (radioGroup.checkedRadioButtonId) { // add intent extra specifying the type of study
-                R.id.mode_scored -> {
-                    // TODO: Start scored study
-                }
-                R.id.mode_unscored -> {
-                    // TODO: Start unscored study
-                }
-                R.id.mode_stealth -> {
-                    // TODO: Start stealth study
-                }
+                R.id.mode_scored -> intent.putExtra("mode", StudyMode.SCORED.id)
+                R.id.mode_unscored -> intent.putExtra("mode", StudyMode.UNSCORED.id)
+                R.id.mode_stealth -> intent.putExtra("mode", StudyMode.STEALTH.id)
             }
             startActivity(intent)
         }

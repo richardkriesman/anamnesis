@@ -23,7 +23,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activity.SettingsActivity"
+            android:name=".activity.settings.SettingsActivity"
             android:label="@string/settings_title"
             android:parentActivityName=".activity.home.HomeActivity">
             <meta-data
@@ -39,9 +39,6 @@
                 android:value="com.team4.anamnesis.activity.home.HomeActivity" />
         </activity>
         <activity
-            android:name=".SettingsActivity"
-            android:label="@string/title_activity_settings" />
-        <activity
             android:name=".activity.modeSelect.ModeSelectActivity"
             android:parentActivityName=".activity.group.GroupActivity">
             <meta-data
@@ -56,6 +53,17 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.team4.anamnesis.activity.group.GroupActivity" />
+        </activity>
+        <activity
+            android:name=".activity.study.StudyActivity"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".activity.study.ResultsActivity"
+            android:label="@string/title_activity_results"
+            android:parentActivityName=".activity.home.HomeActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.team4.anamnesis.activity.home.HomeActivity" />
         </activity>
     </application>
 

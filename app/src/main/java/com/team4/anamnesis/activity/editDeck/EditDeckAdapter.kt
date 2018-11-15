@@ -18,6 +18,7 @@ class EditDeckAdapter(context: AppCompatActivity): RecyclerView.Adapter<EditDeck
 
     private val c: AppCompatActivity = context
     private var flashcards: List<Flashcard> = ArrayList() // list of flashcards
+    private var isFirstLoad: Boolean = true
 
     /**
      * A listener that fires when the user clicks the "delete" button.
@@ -52,7 +53,8 @@ class EditDeckAdapter(context: AppCompatActivity): RecyclerView.Adapter<EditDeck
 
     fun setData(flashcards: List<Flashcard>) {
         this.flashcards = flashcards
-        if (this.flashcards.size != flashcards.size) { // card was added or removed, reload data set
+        if (isFirstLoad || this.flashcards.size != flashcards.size) { // card was added or removed, reload data set
+            isFirstLoad = false
             notifyDataSetChanged()
         }
     }
@@ -84,12 +86,6 @@ class EditDeckAdapter(context: AppCompatActivity): RecyclerView.Adapter<EditDeck
                 override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
 
             })
-//            topText.setOnFocusChangeListener { _, isFocused ->
-//                if (!isFocused) {
-//                    flashcard.frontText = topText.text.toString()
-//                    onFlashcardChanged?.invoke(flashcard)
-//                }
-//            }
 
             // handle bottom text change
             bottomText.addTextChangedListener(object: TextWatcher {
@@ -104,12 +100,6 @@ class EditDeckAdapter(context: AppCompatActivity): RecyclerView.Adapter<EditDeck
                 override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
 
             })
-//            bottomText.setOnFocusChangeListener { _, isFocused ->
-//                if (!isFocused) {
-//                    flashcard.backText = bottomText.text.toString()
-//                    onFlashcardChanged?.invoke(flashcard)
-//                }
-//            }
 
         }
 

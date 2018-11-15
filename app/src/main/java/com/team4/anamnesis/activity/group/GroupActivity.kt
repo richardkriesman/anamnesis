@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
@@ -18,9 +19,13 @@ import com.team4.anamnesis.activity.modeSelect.ModeSelectActivity
 import com.team4.anamnesis.component.TextInputDialog
 import com.team4.anamnesis.component.TextInputDialogCompletedListener
 import com.team4.anamnesis.component.TextInputDialogValidationListener
+import com.team4.anamnesis.db.AppDatabase
 import com.team4.anamnesis.db.entity.Deck
+import com.team4.anamnesis.db.entity.Flashcard
 import com.team4.anamnesis.db.entity.Group
+import com.team4.anamnesis.db.viewModel.DeckModel
 import org.jetbrains.anko.doAsync
+import org.jetbrains.anko.uiThread
 
 class GroupActivity : AppCompatActivity() {
 
@@ -29,7 +34,7 @@ class GroupActivity : AppCompatActivity() {
     private lateinit var emptySubtitle: TextView
     private lateinit var group: Group
     private val manager: GridLayoutManager = GridLayoutManager(this, 2)
-    private lateinit var model: GroupModel
+    private lateinit var model: DeckModel
     private lateinit var recyclerView: RecyclerView
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -58,7 +63,7 @@ class GroupActivity : AppCompatActivity() {
         title = group.name
 
         // instantiate ViewModel
-        model = ViewModelProviders.of(this).get(GroupModel::class.java)
+        model = ViewModelProviders.of(this).get(DeckModel::class.java)
         model.load(group)
 
         // instantiate create deck button

@@ -5,4 +5,7 @@
     <color name="colorAccent">#3576e0</color>
 
     <color name="cardLayoutBackground">#ebebeb</color>
+
+    <color name="positive">#12bb35</color>
+    <color name="negative">#ba1429</color>
 </resources>

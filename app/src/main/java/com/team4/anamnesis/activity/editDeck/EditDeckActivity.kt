@@ -18,6 +18,7 @@ import com.team4.anamnesis.component.LinearPageHelper
 import com.team4.anamnesis.component.LinearPageLayoutManager
 import com.team4.anamnesis.db.entity.Deck
 import com.team4.anamnesis.db.entity.Flashcard
+import com.team4.anamnesis.db.viewModel.FlashcardModel
 import org.jetbrains.anko.doAsync
 
 const val EDIT_DECK_REQUEST_CODE = 1
@@ -31,7 +32,7 @@ class EditDeckActivity : AppCompatActivity() {
     private val manager: LinearPageLayoutManager = LinearPageLayoutManager(this, LinearLayoutManager.HORIZONTAL,
             false)
     private lateinit var leftButton: ImageView
-    private lateinit var model: EditDeckModel
+    private lateinit var model: FlashcardModel
     private lateinit var recyclerView: RecyclerView
     private lateinit var rightButton: ImageView
     private lateinit var scrollIndicator: TextView
@@ -67,7 +68,7 @@ class EditDeckActivity : AppCompatActivity() {
         scrollIndicator = findViewById(R.id.edit_scroll_indicator)
 
         // instantiate ViewModel
-        model = ViewModelProviders.of(this).get(EditDeckModel::class.java)
+        model = ViewModelProviders.of(this).get(FlashcardModel::class.java)
         model.load(deck)
 
         // instantiate create deck button
@@ -126,7 +127,9 @@ class EditDeckActivity : AppCompatActivity() {
                 it.isNotEmpty()           -> it.size - 1
                 else                      -> 0
             }
-            recyclerView.smoothScrollToPosition(newPosition)
+            if (newPosition != currentPosition) {
+                recyclerView.smoothScrollToPosition(newPosition)
+            }
 
             // show/hide empty text if empty
             if (it.isEmpty()) {

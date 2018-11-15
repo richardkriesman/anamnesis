@@ -1,7 +1,6 @@
 package com.team4.anamnesis.activity.home
 
 import android.content.Intent
-import android.opengl.Visibility
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -20,7 +19,6 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar
 import com.team4.anamnesis.R
-import com.team4.anamnesis.activity.SettingsActivity
 import com.team4.anamnesis.activity.group.GroupActivity
 import com.team4.anamnesis.component.TextInputDialog
 import com.team4.anamnesis.component.TextInputDialogCompletedListener
@@ -29,7 +27,8 @@ import com.team4.anamnesis.db.AppDatabase
 import com.team4.anamnesis.db.entity.Group
 import org.jetbrains.anko.doAsync
 import android.preference.PreferenceActivity
-
+import com.team4.anamnesis.activity.settings.SettingsActivity
+import com.team4.anamnesis.db.viewModel.GroupModel
 
 
 class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
@@ -39,7 +38,7 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     private lateinit var emptyTitle: TextView
     private lateinit var emptySubtitle: TextView
     private val manager: GridLayoutManager = GridLayoutManager(this, 2)
-    private lateinit var model: HomeModel
+    private lateinit var model: GroupModel
     private lateinit var recyclerView: RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -52,7 +51,7 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         AppDatabase.init(applicationContext)
 
         // instantiate ViewModel
-        model = ViewModelProviders.of(this).get(HomeModel::class.java)
+        model = ViewModelProviders.of(this).get(GroupModel::class.java)
 
         // instantiate navigation view
         val navigationView = findViewById<NavigationView>(R.id.nav_view)
@@ -226,8 +225,8 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     fun onDrawerSettingsClick(menuItem: MenuItem) {
-        val intent = Intent(this, com.team4.anamnesis.SettingsActivity::class.java)
-        intent.putExtra(PreferenceActivity.EXTRA_SHOW_FRAGMENT, com.team4.anamnesis.SettingsActivity.GeneralPreferenceFragment::class.java.name)
+        val intent = Intent(this, SettingsActivity::class.java)
+        intent.putExtra(PreferenceActivity.EXTRA_SHOW_FRAGMENT, SettingsActivity.GeneralPreferenceFragment::class.java.name)
         intent.putExtra(PreferenceActivity.EXTRA_NO_HEADERS, true)
         startActivityFromHome(intent)
     }

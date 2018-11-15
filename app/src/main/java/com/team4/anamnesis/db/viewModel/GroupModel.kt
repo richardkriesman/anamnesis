@@ -1,11 +1,11 @@
-package com.team4.anamnesis.activity.home
+package com.team4.anamnesis.db.viewModel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.team4.anamnesis.db.AppDatabase
 import com.team4.anamnesis.db.entity.Group
 
-class HomeModel: ViewModel() {
+class GroupModel: ViewModel() {
     val groups: LiveData<List<Group>> = AppDatabase.instance!!.groupDao().getAll()
 
     fun createGroup(group: Group) {

@@ -1,4 +1,4 @@
-package com.team4.anamnesis.activity.group
+package com.team4.anamnesis.db.viewModel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
@@ -6,7 +6,7 @@ import com.team4.anamnesis.db.AppDatabase
 import com.team4.anamnesis.db.entity.Deck
 import com.team4.anamnesis.db.entity.Group
 
-class GroupModel: ViewModel() {
+class DeckModel: ViewModel() {
     lateinit var decks: LiveData<List<Deck>>
 
     fun load(group: Group) {

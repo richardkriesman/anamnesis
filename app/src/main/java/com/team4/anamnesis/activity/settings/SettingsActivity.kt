@@ -1,4 +1,4 @@
-package com.team4.anamnesis
+package com.team4.anamnesis.activity.settings
 
 import android.annotation.TargetApi
 import android.content.Context
@@ -16,6 +16,7 @@ import android.preference.PreferenceManager
 import android.preference.RingtonePreference
 import android.text.TextUtils
 import android.view.MenuItem
+import com.team4.anamnesis.R
 
 /**
  * A [PreferenceActivity] that presents a set of application settings. On

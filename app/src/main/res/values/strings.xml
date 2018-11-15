@@ -149,5 +149,9 @@
     <string name="edit_snackbar_card_deleted">Deleted flashcard</string>
     <string name="edit_scroll_indicator_text">"%1$s" / "%2$s"</string>
 
+    <string name="study_correct">Correct</string>
+    <string name="study_incorrect">Incorrect</string>
+    <string name="title_activity_results">ResultsActivity</string>
+
 
 </resources>
