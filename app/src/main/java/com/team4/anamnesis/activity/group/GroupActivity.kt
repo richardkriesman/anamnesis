@@ -13,14 +13,14 @@ import com.team4.anamnesis.R
 import com.team4.anamnesis.component.TextInputDialog
 import com.team4.anamnesis.component.TextInputDialogCompletedListener
 import com.team4.anamnesis.component.TextInputDialogValidationListener
-import com.team4.anamnesis.db.entity.FlashcardDeck
-import com.team4.anamnesis.db.entity.FlashcardDeckGroup
+import com.team4.anamnesis.db.entity.Deck
+import com.team4.anamnesis.db.entity.Group
 import org.jetbrains.anko.doAsync
 
 class GroupActivity : AppCompatActivity() {
 
     private val adapter: GroupDeckAdapter = GroupDeckAdapter(this)
-    private lateinit var group: FlashcardDeckGroup
+    private lateinit var group: Group
     private val manager: GridLayoutManager = GridLayoutManager(this, 2)
     private lateinit var model: GroupModel
     private lateinit var recyclerView: RecyclerView
@@ -31,7 +31,7 @@ class GroupActivity : AppCompatActivity() {
         actionBar?.setDisplayHomeAsUpEnabled(true)
 
         // extract group from intent
-        group = intent.getSerializableExtra("group") as FlashcardDeckGroup
+        group = intent.getSerializableExtra("group") as Group
 
         // set activity title to group name
         title = group.name
@@ -92,7 +92,7 @@ class GroupActivity : AppCompatActivity() {
             override fun onComplete(text: String) { // we now have the name of the deck
 
                 // create a new deck
-                val deck = FlashcardDeck(name = text, groupId = group.id)
+                val deck = Deck(name = text, groupId = group.id)
                 doAsync {
                     model.createDeck(deck)
                 }
@@ -109,11 +109,11 @@ class GroupActivity : AppCompatActivity() {
 
     }
 
-    fun onDeckClicked(deck: FlashcardDeck) {
+    fun onDeckClicked(deck: Deck) {
 
     }
 
-    fun onDeckDeleteClicked(deck: FlashcardDeck) {
+    fun onDeckDeleteClicked(deck: Deck) {
 
         // delete the deck
         doAsync {
@@ -132,7 +132,7 @@ class GroupActivity : AppCompatActivity() {
 
     }
 
-    fun onDeckEditCLicked(deck: FlashcardDeck) {
+    fun onDeckEditCLicked(deck: Deck) {
 
     }
 

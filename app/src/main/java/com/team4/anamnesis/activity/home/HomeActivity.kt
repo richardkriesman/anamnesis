@@ -1,10 +1,12 @@
 package com.team4.anamnesis.activity.home
 
 import android.content.Intent
+import android.opengl.Visibility
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.TextView
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -24,13 +26,15 @@ import com.team4.anamnesis.component.TextInputDialog
 import com.team4.anamnesis.component.TextInputDialogCompletedListener
 import com.team4.anamnesis.component.TextInputDialogValidationListener
 import com.team4.anamnesis.db.AppDatabase
-import com.team4.anamnesis.db.entity.FlashcardDeckGroup
+import com.team4.anamnesis.db.entity.Group
 import org.jetbrains.anko.doAsync
 
 class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     private val adapter: HomeGroupAdapter = HomeGroupAdapter(this)
     private lateinit var drawer: DrawerLayout
+    private lateinit var emptyTitle: TextView
+    private lateinit var emptySubtitle: TextView
     private val manager: GridLayoutManager = GridLayoutManager(this, 2)
     private lateinit var model: HomeModel
     private lateinit var recyclerView: RecyclerView
@@ -71,6 +75,8 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         recyclerView = findViewById(R.id.home_recyclerview)
         recyclerView.adapter = adapter
         recyclerView.layoutManager = manager
+        emptyTitle = findViewById(R.id.home_empty_title)
+        emptySubtitle = findViewById(R.id.home_empty_subtitle)
 
         // listen for group card click
         adapter.onGroupClicked = {
@@ -90,6 +96,18 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         // listen for changes to groups
         model.groups.observe(this, Observer {
             adapter.setData(it)
+
+            // show/hide empty text if empty
+            if (it.isEmpty()) {
+                emptyTitle.visibility = View.VISIBLE
+                emptySubtitle.visibility = View.VISIBLE
+                recyclerView.visibility = View.GONE
+            } else {
+                emptyTitle.visibility = View.GONE
+                emptySubtitle.visibility = View.GONE
+                recyclerView.visibility = View.VISIBLE
+            }
+
         })
 
     }
@@ -103,13 +121,13 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }
     }
 
-    fun onCardClicked(group: FlashcardDeckGroup) {
+    fun onCardClicked(group: Group) {
         val intent = Intent(this, GroupActivity::class.java)
         intent.putExtra("group", group)
         startActivity(intent)
     }
 
-    fun onCardDeleteClicked(group: FlashcardDeckGroup) {
+    fun onCardDeleteClicked(group: Group) {
 
         // delete the group
         doAsync {
@@ -128,7 +146,7 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     }
 
-    fun onCardRenameClicked(group: FlashcardDeckGroup) {
+    fun onCardRenameClicked(group: Group) {
         val dialog = TextInputDialog(this, R.string.home_dialog_rename_group_title,
                 R.string.home_dialog_new_group_hint)
 
@@ -182,7 +200,7 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             override fun onComplete(text: String) { // we now have the name of the group
 
                 // create a new group
-                val group = FlashcardDeckGroup(name = text)
+                val group = Group(name = text)
                 doAsync {
                     model.createGroup(group)
                 }

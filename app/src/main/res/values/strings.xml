@@ -21,6 +21,8 @@
     <string name="home_snackbar_renamed_group">Renamed group "%1$s" to "%2$s"</string>
     <string name="home_snackbar_deleted_group">Deleted group "%1$s"</string>
     <string name="home_snackbar_deleted_group_action">Undo</string>
+    <string name="home_empty_title">No groups</string>
+    <string name="home_empty_subtitle">Add a group to organize your flashcard decks</string>
     <string name="item_group_rename">Rename</string>
     <string name="item_group_delete">Delete group</string>
 

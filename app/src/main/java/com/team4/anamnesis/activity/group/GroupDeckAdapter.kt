@@ -10,27 +10,27 @@ import androidx.appcompat.widget.PopupMenu
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.team4.anamnesis.R
-import com.team4.anamnesis.db.entity.FlashcardDeck
+import com.team4.anamnesis.db.entity.Deck
 
 class GroupDeckAdapter(context: Context): RecyclerView.Adapter<GroupDeckAdapter.GroupDeckHolder>() {
 
     /**
      * A listener that fires when a deck is clicked.
      */
-    var onDeckClicked: ((deck: FlashcardDeck) -> Unit)? = null
+    var onDeckClicked: ((deck: Deck) -> Unit)? = null
 
     /**
      * A listener that fires when the user clicks the "delete" menu item.
      */
-    var onDeckDeleteClicked: ((deck: FlashcardDeck) -> Unit)? = null
+    var onDeckDeleteClicked: ((deck: Deck) -> Unit)? = null
 
     /**
      * A listener that fires when the user clicks the "edit" menu item.
      */
-    var onDeckEditClicked: ((group: FlashcardDeck) -> Unit)? = null
+    var onDeckEditClicked: ((group: Deck) -> Unit)? = null
 
     private val c: Context = context // the kotlin compiler won't let us access context
-    private var decks: List<FlashcardDeck> = ArrayList() // list of flashcard decks
+    private var decks: List<Deck> = ArrayList() // list of flashcard decks
 
     override fun getItemCount(): Int {
         return decks.size
@@ -48,7 +48,7 @@ class GroupDeckAdapter(context: Context): RecyclerView.Adapter<GroupDeckAdapter.
     /**
      * Replace the set of decks.
      */
-    fun setData(decks: List<FlashcardDeck>) {
+    fun setData(decks: List<Deck>) {
         this.decks = decks
         notifyDataSetChanged()
     }
@@ -58,7 +58,7 @@ class GroupDeckAdapter(context: Context): RecyclerView.Adapter<GroupDeckAdapter.
         private var menuButton: ImageView = itemView.findViewById(R.id.item_deck_menu)
         private var textView: TextView = itemView.findViewById(R.id.item_deck_text)
 
-        fun bind(deck: FlashcardDeck) {
+        fun bind(deck: Deck) {
             textView.text = deck.name
 
             // listen for clicks on the card

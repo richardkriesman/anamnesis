@@ -5,8 +5,11 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import java.io.Serializable
 
-@Entity(tableName = "flashcard_deck_group")
-data class FlashcardDeckGroup(
+/**
+ * A grouping of flashcard decks, usually by subject.
+ */
+@Entity(tableName = "group")
+data class Group(
         @PrimaryKey(autoGenerate = true) var id: Int = 0,
         @ColumnInfo(name = "name") var name: String
 ): Serializable

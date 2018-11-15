@@ -10,27 +10,27 @@ import androidx.appcompat.widget.PopupMenu
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.team4.anamnesis.R
-import com.team4.anamnesis.db.entity.FlashcardDeckGroup
+import com.team4.anamnesis.db.entity.Group
 
 class HomeGroupAdapter(context: Context): RecyclerView.Adapter<HomeGroupAdapter.HomeGroupHolder>() {
 
     /**
      * A listener that fires when a group card is clicked.
      */
-    var onGroupClicked: ((group: FlashcardDeckGroup) -> Unit)? = null
+    var onGroupClicked: ((group: Group) -> Unit)? = null
 
     /**
      * A listener that fires when the user clicks the "delete" menu item.
      */
-    var onGroupDeleteClicked: ((group: FlashcardDeckGroup) -> Unit)? = null
+    var onGroupDeleteClicked: ((group: Group) -> Unit)? = null
 
     /**
      * A listener that fires when the user clicks the "rename" menu item.
      */
-    var onGroupRenameClicked: ((group: FlashcardDeckGroup) -> Unit)? = null
+    var onGroupRenameClicked: ((group: Group) -> Unit)? = null
 
     private val c: Context = context // the kotlin compiler won't let us access context
-    private var groups: List<FlashcardDeckGroup> = ArrayList() // list of flashcard groups
+    private var groups: List<Group> = ArrayList() // list of flashcard groups
 
     override fun getItemCount(): Int {
         return groups.size
@@ -48,7 +48,7 @@ class HomeGroupAdapter(context: Context): RecyclerView.Adapter<HomeGroupAdapter.
     /**
      * Replace the set of groups.
      */
-    fun setData(groups: List<FlashcardDeckGroup>) {
+    fun setData(groups: List<Group>) {
         this.groups = groups
         notifyDataSetChanged()
     }
@@ -58,7 +58,7 @@ class HomeGroupAdapter(context: Context): RecyclerView.Adapter<HomeGroupAdapter.
         private var menuButton: ImageView = itemView.findViewById(R.id.item_group_menu)
         private var textView: TextView = itemView.findViewById(R.id.item_group_text)
 
-        fun bind(group: FlashcardDeckGroup) {
+        fun bind(group: Group) {
             textView.text = group.name
 
             // listen for clicks on the card
