@@ -2,6 +2,7 @@ package com.team4.anamnesis.activity.group
 
 import android.os.Bundle
 import android.view.View
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -20,6 +21,8 @@ import org.jetbrains.anko.doAsync
 class GroupActivity : AppCompatActivity() {
 
     private val adapter: GroupDeckAdapter = GroupDeckAdapter(this)
+    private lateinit var emptyTitle: TextView
+    private lateinit var emptySubtitle: TextView
     private lateinit var group: Group
     private val manager: GridLayoutManager = GridLayoutManager(this, 2)
     private lateinit var model: GroupModel
@@ -50,6 +53,8 @@ class GroupActivity : AppCompatActivity() {
         recyclerView = findViewById(R.id.group_recyclerview)
         recyclerView.adapter = adapter
         recyclerView.layoutManager = manager
+        emptyTitle = findViewById(R.id.group_empty_title)
+        emptySubtitle = findViewById(R.id.group_empty_subtitle)
 
         // listen for deck click
         adapter.onDeckClicked = {
@@ -69,6 +74,17 @@ class GroupActivity : AppCompatActivity() {
         // listen for changes to decks
         model.decks.observe(this, Observer {
             adapter.setData(it)
+
+            // show/hide empty text if empty
+            if (it.isEmpty()) {
+                emptyTitle.visibility = View.VISIBLE
+                emptySubtitle.visibility = View.VISIBLE
+                recyclerView.visibility = View.GONE
+            } else {
+                emptyTitle.visibility = View.GONE
+                emptySubtitle.visibility = View.GONE
+                recyclerView.visibility = View.VISIBLE
+            }
         })
 
     }
