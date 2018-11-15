@@ -32,6 +32,8 @@
     <string name="group_dialog_new_group_hint">Name</string>
     <string name="group_snackbar_new_deck">Created deck "%1$s"</string>
     <string name="group_snackbar_deleted_deck">Deleted deck "%1$s"</string>
+    <string name="group_empty_title">No flashcard decks</string>
+    <string name="group_empty_subtitle">Add a flashcard deck to start studying a topic</string>
     <string name="item_deck_edit">Edit</string>
     <string name="item_deck_delete">Delete deck</string>
 
