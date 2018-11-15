@@ -32,6 +32,7 @@ class SettingsActivity : PreferenceActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setupActionBar()
+
     }
 
     /**
@@ -82,8 +83,8 @@ class SettingsActivity : PreferenceActivity() {
             // to their values. When their values change, their summaries are
             // updated to reflect the new value, per the Android Design
             // guidelines.
-            bindPreferenceSummaryToValue(findPreference("example_text"))
-            bindPreferenceSummaryToValue(findPreference("example_list"))
+            //bindPreferenceSummaryToValue(findPreference("example_text"))
+            bindPreferenceSummaryToValue(findPreference("example_list")) // font sizes
         }
 
         override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -100,6 +101,7 @@ class SettingsActivity : PreferenceActivity() {
      * This fragment shows notification preferences only. It is used when the
      * activity is showing a two-pane settings UI.
      */
+
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     class NotificationPreferenceFragment : PreferenceFragment() {
         override fun onCreate(savedInstanceState: Bundle?) {
