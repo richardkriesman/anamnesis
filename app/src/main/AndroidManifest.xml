@@ -48,6 +48,15 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.team4.anamnesis.activity.group.GroupActivity" />
         </activity>
+        <activity
+            android:name=".activity.editDeck.EditDeckActivity"
+            android:label="@string/title_activity_edit_deck"
+            android:parentActivityName=".activity.group.GroupActivity"
+            android:windowSoftInputMode="adjustResize">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.team4.anamnesis.activity.group.GroupActivity" />
+        </activity>
     </application>
 
 </manifest>

@@ -2,9 +2,7 @@ package com.team4.anamnesis.activity.group
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.MenuItem
 import android.view.View
-import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
@@ -14,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 import com.team4.anamnesis.R
+import com.team4.anamnesis.activity.editDeck.EditDeckActivity
 import com.team4.anamnesis.activity.studyMode.StudyModeActivity
 import com.team4.anamnesis.component.TextInputDialog
 import com.team4.anamnesis.component.TextInputDialogCompletedListener
@@ -72,7 +71,7 @@ class GroupActivity : AppCompatActivity() {
 
         // listen for deck edit option click
         adapter.onDeckEditClicked = {
-            onDeckEditCLicked(it)
+            onDeckEditClicked(it)
         }
 
         // listen for changes to decks
@@ -154,8 +153,10 @@ class GroupActivity : AppCompatActivity() {
 
     }
 
-    fun onDeckEditCLicked(deck: Deck) {
-
+    fun onDeckEditClicked(deck: Deck) {
+        val intent = Intent(this, EditDeckActivity::class.java)
+        intent.putExtra("deck", deck)
+        startActivity(intent)
     }
 
 }

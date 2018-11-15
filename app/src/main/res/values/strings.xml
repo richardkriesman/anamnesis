@@ -22,7 +22,7 @@
     <string name="home_snackbar_deleted_group">Deleted group "%1$s"</string>
     <string name="home_snackbar_deleted_group_action">Undo</string>
     <string name="home_empty_title">No groups</string>
-    <string name="home_empty_subtitle">Add a group to organize your flashcard decks</string>
+    <string name="home_empty_subtitle">Add a group to organize your flashcard decks.</string>
     <string name="item_group_rename">Rename</string>
     <string name="item_group_delete">Delete group</string>
 
@@ -33,7 +33,7 @@
     <string name="group_snackbar_new_deck">Created deck "%1$s"</string>
     <string name="group_snackbar_deleted_deck">Deleted deck "%1$s"</string>
     <string name="group_empty_title">No flashcard decks</string>
-    <string name="group_empty_subtitle">Add a flashcard deck to start studying a topic</string>
+    <string name="group_empty_subtitle">Add a flashcard deck to start studying a topic.</string>
     <string name="item_deck_edit">Edit</string>
     <string name="item_deck_delete">Delete deck</string>
     <string name="title_activity_settings">Settings</string>
@@ -99,6 +99,11 @@
 
     <string name="pref_title_system_sync_settings">System sync settings</string>
 
+    <string name="pref_description_social_recommendations" />
+    <string name="pref_title_social_recommendations" />
+    <string name="pref_default_display_name" />
+    <string name="pref_title_display_name" />
+
     <!-- Example settings for Notifications -->
     <string name="pref_header_notifications">Notifications</string>
 
@@ -128,5 +133,15 @@
     <string name="mode_title_default">Select a study mode</string>
     <string name="mode_activity_title">Study "%1$s"</string>
     <string name="mode_start">Start</string>
+
+    <string name="title_activity_edit_deck">EditDeck</string>
+    <string name="edit_title">Edit "%1$s"</string>
+    <string name="edit_top_text_default">Tap to edit top text</string>
+    <string name="edit_bottom_text_default">Tap to edit bottom text</string>
+    <string name="edit_empty_title">No flashcards</string>
+    <string name="edit_empty_subtitle">Add a flashcard and it will show up here.</string>
+    <string name="edit_snackbar_card_added">Added flashcard</string>
+    <string name="edit_snackbar_card_deleted">Deleted flashcard</string>
+
 
 </resources>

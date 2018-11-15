@@ -19,7 +19,7 @@ interface DeckDao {
     @Query("SELECT * FROM deck")
     fun getAll(): LiveData<List<Deck>>
 
-    @Query("SELECT * FROM deck WHERE group_id = :groupId")
+    @Query("SELECT * FROM deck WHERE group_id = :groupId ORDER BY id ASC")
     fun getByGroupId(groupId: Int): LiveData<List<Deck>>
 
 }

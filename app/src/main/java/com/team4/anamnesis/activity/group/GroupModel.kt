@@ -10,14 +10,14 @@ class GroupModel: ViewModel() {
     lateinit var decks: LiveData<List<Deck>>
 
     fun load(group: Group) {
-        decks = AppDatabase.instance!!.flashcardDeckDao().getByGroupId(group.id)
+        decks = AppDatabase.instance!!.deckDao().getByGroupId(group.id)
     }
 
     fun createDeck(deck: Deck) {
-        AppDatabase.instance!!.flashcardDeckDao().create(deck)
+        AppDatabase.instance!!.deckDao().create(deck)
     }
 
     fun deleteDeck(deck: Deck) {
-        AppDatabase.instance!!.flashcardDeckDao().delete(deck)
+        AppDatabase.instance!!.deckDao().delete(deck)
     }
 }

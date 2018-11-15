@@ -5,6 +5,7 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.team4.anamnesis.db.dao.DeckDao
+import com.team4.anamnesis.db.dao.FlashcardDao
 import com.team4.anamnesis.db.dao.GroupDao
 import com.team4.anamnesis.db.entity.Deck
 import com.team4.anamnesis.db.entity.Flashcard
@@ -36,7 +37,8 @@ abstract class AppDatabase : RoomDatabase() {
 
     }
 
-    abstract fun flashcardDeckDao(): DeckDao
-    abstract fun flashcardDeckGroupDao(): GroupDao
+    abstract fun deckDao(): DeckDao
+    abstract fun flashcardDao(): FlashcardDao
+    abstract fun groupDao(): GroupDao
 
 }
