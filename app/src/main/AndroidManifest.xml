@@ -38,6 +38,13 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.team4.anamnesis.activity.home.HomeActivity" />
         </activity>
+        <activity
+            android:name=".activity.studyMode.StudyModeActivity"
+            android:parentActivityName=".activity.group.GroupActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.team4.anamnesis.activity.group.GroupActivity" />
+        </activity>
     </application>
 
 </manifest>
