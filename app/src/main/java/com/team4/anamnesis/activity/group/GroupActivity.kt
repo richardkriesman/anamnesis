@@ -14,7 +14,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.team4.anamnesis.R
 import com.team4.anamnesis.activity.editDeck.EDIT_DECK_REQUEST_CODE
 import com.team4.anamnesis.activity.editDeck.EditDeckActivity
-import com.team4.anamnesis.activity.studyMode.StudyModeActivity
+import com.team4.anamnesis.activity.modeSelect.ModeSelectActivity
 import com.team4.anamnesis.component.TextInputDialog
 import com.team4.anamnesis.component.TextInputDialogCompletedListener
 import com.team4.anamnesis.component.TextInputDialogValidationListener
@@ -144,7 +144,7 @@ class GroupActivity : AppCompatActivity() {
     }
 
     fun onDeckClicked(deck: Deck) {
-        val intent = Intent(this, StudyModeActivity::class.java)
+        val intent = Intent(this, ModeSelectActivity::class.java)
         intent.putExtra("deck", deck)
         startActivity(intent)
     }

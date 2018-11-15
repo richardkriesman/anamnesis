@@ -1,4 +1,4 @@
-package com.team4.anamnesis.activity.studyMode
+package com.team4.anamnesis.activity.modeSelect
 
 import android.content.Intent
 import android.os.Bundle
@@ -10,7 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.team4.anamnesis.R
 import com.team4.anamnesis.db.entity.Deck
 
-class StudyModeActivity : AppCompatActivity() {
+class ModeSelectActivity : AppCompatActivity() {
 
     private lateinit var deck: Deck
     private lateinit var modeDesc: TextView

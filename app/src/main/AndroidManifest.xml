@@ -42,7 +42,7 @@
             android:name=".SettingsActivity"
             android:label="@string/title_activity_settings" />
         <activity
-            android:name=".activity.studyMode.StudyModeActivity"
+            android:name=".activity.modeSelect.ModeSelectActivity"
             android:parentActivityName=".activity.group.GroupActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
