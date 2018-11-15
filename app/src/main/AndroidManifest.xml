@@ -40,7 +40,14 @@
         </activity>
         <activity
             android:name=".SettingsActivity"
-            android:label="@string/title_activity_settings"></activity>
+            android:label="@string/title_activity_settings" />
+        <activity
+            android:name=".activity.studyMode.StudyModeActivity"
+            android:parentActivityName=".activity.group.GroupActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.team4.anamnesis.activity.group.GroupActivity" />
+        </activity>
     </application>
 
 </manifest>
