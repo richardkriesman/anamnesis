@@ -1,4 +1,4 @@
-package com.team4.anamnesis.activities
+package com.team4.anamnesis.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

@@ -13,7 +13,7 @@ interface FlashcardDeckGroupDao {
     @Delete
     fun delete(group: FlashcardDeckGroup)
 
-    @Query("SELECT * FROM flashcard_deck_group")
+    @Query("SELECT * FROM flashcard_deck_group ORDER BY id ASC")
     fun getAll(): LiveData<List<FlashcardDeckGroup>>
 
     @Query("SELECT * FROM flashcard_deck_group WHERE id = :id LIMIT 1")

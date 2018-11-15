@@ -1,4 +1,4 @@
-package com.team4.anamnesis.activities.main
+package com.team4.anamnesis.activity.home
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -17,17 +17,17 @@ class HomeGroupAdapter(context: Context): RecyclerView.Adapter<HomeGroupAdapter.
     /**
      * A listener that fires when a group card is clicked.
      */
-    var onCardClicked: ((group: FlashcardDeckGroup) -> Unit)? = null
+    var onGroupClicked: ((group: FlashcardDeckGroup) -> Unit)? = null
 
     /**
      * A listener that fires when the user clicks the "delete" menu item.
      */
-    var onCardDeleteClicked: ((group: FlashcardDeckGroup) -> Unit)? = null
+    var onGroupDeleteClicked: ((group: FlashcardDeckGroup) -> Unit)? = null
 
     /**
      * A listener that fires when the user clicks the "rename" menu item.
      */
-    var onCardRenameClicked: ((group: FlashcardDeckGroup) -> Unit)? = null
+    var onGroupRenameClicked: ((group: FlashcardDeckGroup) -> Unit)? = null
 
     private val c: Context = context // the kotlin compiler won't let us access context
     private var groups: List<FlashcardDeckGroup> = ArrayList() // list of flashcard groups
@@ -54,16 +54,16 @@ class HomeGroupAdapter(context: Context): RecyclerView.Adapter<HomeGroupAdapter.
     }
 
     inner class HomeGroupHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
-        private var cardView: CardView = itemView.findViewById(R.id.item_group_home_card)
-        private var menuButton: ImageView = itemView.findViewById(R.id.item_group_home_menu)
-        private var textView: TextView = itemView.findViewById(R.id.item_group_home_text)
+        private var cardView: CardView = itemView.findViewById(R.id.item_group_card)
+        private var menuButton: ImageView = itemView.findViewById(R.id.item_group_menu)
+        private var textView: TextView = itemView.findViewById(R.id.item_group_text)
 
         fun bind(group: FlashcardDeckGroup) {
             textView.text = group.name
 
             // listen for clicks on the card
             cardView.setOnClickListener {
-                onCardClicked?.invoke(group)
+                onGroupClicked?.invoke(group)
             }
 
             // listen for clicks on the menu button
@@ -77,11 +77,11 @@ class HomeGroupAdapter(context: Context): RecyclerView.Adapter<HomeGroupAdapter.
                 popupMenu.setOnMenuItemClickListener { menuItem ->
                     when (menuItem.itemId) {
                         R.id.menu_group_rename -> {
-                            onCardRenameClicked?.invoke(group)
+                            onGroupRenameClicked?.invoke(group)
                             true
                         }
                         R.id.menu_group_delete -> { // delete the group
-                            onCardDeleteClicked?.invoke(group)
+                            onGroupDeleteClicked?.invoke(group)
                             true
                         }
                         else -> false

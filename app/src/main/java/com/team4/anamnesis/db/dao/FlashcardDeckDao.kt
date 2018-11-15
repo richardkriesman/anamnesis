@@ -1,5 +1,6 @@
 package com.team4.anamnesis.db.dao
 
+import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
@@ -16,9 +17,9 @@ interface FlashcardDeckDao {
     fun delete(flashcardDeck: FlashcardDeck)
 
     @Query("SELECT * FROM flashcard_deck")
-    fun getAll(): List<FlashcardDeck>
+    fun getAll(): LiveData<List<FlashcardDeck>>
 
     @Query("SELECT * FROM flashcard_deck WHERE group_id = :groupId")
-    fun getByGroupId(groupId: Int): List<FlashcardDeck>
+    fun getByGroupId(groupId: Int): LiveData<List<FlashcardDeck>>
 
 }

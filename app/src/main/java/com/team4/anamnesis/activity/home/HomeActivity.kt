@@ -1,4 +1,4 @@
-package com.team4.anamnesis.activities.main
+package com.team4.anamnesis.activity.home
 
 import android.content.Intent
 import android.os.Bundle
@@ -18,7 +18,8 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar
 import com.team4.anamnesis.R
-import com.team4.anamnesis.activities.SettingsActivity
+import com.team4.anamnesis.activity.SettingsActivity
+import com.team4.anamnesis.activity.group.GroupActivity
 import com.team4.anamnesis.component.TextInputDialog
 import com.team4.anamnesis.component.TextInputDialogCompletedListener
 import com.team4.anamnesis.component.TextInputDialogValidationListener
@@ -40,7 +41,7 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
 
-        // initialize AppDatabase
+        // instantiate AppDatabase
         AppDatabase.init(applicationContext)
 
         // instantiate ViewModel
@@ -72,17 +73,17 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         recyclerView.layoutManager = manager
 
         // listen for group card click
-        adapter.onCardClicked = {
+        adapter.onGroupClicked = {
             onCardClicked(it)
         }
 
         // listen for group card delete button click
-        adapter.onCardDeleteClicked = {
+        adapter.onGroupDeleteClicked = {
             onCardDeleteClicked(it)
         }
 
         // listen for group card rename button click
-        adapter.onCardRenameClicked = {
+        adapter.onGroupRenameClicked = {
             onCardRenameClicked(it)
         }
 
@@ -103,7 +104,9 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     fun onCardClicked(group: FlashcardDeckGroup) {
-        // TODO: Go to the group screen to select a flashcard deck
+        val intent = Intent(this, GroupActivity::class.java)
+        intent.putExtra("group", group)
+        startActivity(intent)
     }
 
     fun onCardDeleteClicked(group: FlashcardDeckGroup) {
@@ -185,8 +188,7 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 }
 
                 // display a snackbar affirming the new deck was created
-                val res = resources
-                val snackbarText = String.format(res.getString(R.string.home_snackbar_new_group), text)
+                val snackbarText = String.format(resources.getString(R.string.home_snackbar_new_group), text)
                 Snackbar.make(view, snackbarText, Snackbar.LENGTH_LONG).setAction("Action", null).show()
 
             }

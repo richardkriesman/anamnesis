@@ -6,14 +6,13 @@
     android:layout_height="wrap_content">
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/item_group_card"
+        android:id="@+id/item_deck_card"
         android:layout_width="128dp"
         android:layout_height="169dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
-        android:backgroundTint="@color/colorPrimary"
         android:clickable="true"
         android:foreground="?android:attr/selectableItemBackground"
         app:cardCornerRadius="4dp"
@@ -24,15 +23,15 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/item_group_text"
+            android:id="@+id/item_deck_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical|center_horizontal"
             android:textAppearance="@style/Base.TextAppearance.MaterialComponents.Button"
-            android:textColor="@android:color/white" />
+            android:textColor="@color/colorPrimary" />
 
         <ImageView
-            android:id="@+id/item_group_menu"
+            android:id="@+id/item_deck_menu"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
@@ -40,7 +39,7 @@
             android:layout_marginEnd="8dp"
             android:background="?selectableItemBackgroundBorderless"
             android:clickable="true"
-            android:tint="@android:color/white"
+            android:tint="@color/colorPrimary"
             app:srcCompat="@drawable/ic_baseline_more_vert_24px" />
     </androidx.cardview.widget.CardView>
 

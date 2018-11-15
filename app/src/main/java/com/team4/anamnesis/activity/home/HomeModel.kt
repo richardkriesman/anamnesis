@@ -1,4 +1,4 @@
-package com.team4.anamnesis.activities.main
+package com.team4.anamnesis.activity.home
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
