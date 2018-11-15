@@ -7,11 +7,12 @@ import androidx.room.RoomDatabase
 import com.team4.anamnesis.db.dao.DeckDao
 import com.team4.anamnesis.db.dao.GroupDao
 import com.team4.anamnesis.db.entity.Deck
+import com.team4.anamnesis.db.entity.Flashcard
 import com.team4.anamnesis.db.entity.Group
 
 const val DATABASE_NAME = "anamnesis"
 
-@Database(entities = [Deck::class, Group::class], version = 1)
+@Database(entities = [Flashcard::class, Deck::class, Group::class], version = 1)
 abstract class AppDatabase : RoomDatabase() {
 
     companion object {
