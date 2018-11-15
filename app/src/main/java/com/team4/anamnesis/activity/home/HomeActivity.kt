@@ -223,7 +223,7 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     fun onDrawerSettingsClick(menuItem: MenuItem) {
-        val intent = Intent(this, SettingsActivity::class.java)
+        val intent = Intent(this, com.team4.anamnesis.SettingsActivity::class.java)
         startActivityFromHome(intent)
     }
 
