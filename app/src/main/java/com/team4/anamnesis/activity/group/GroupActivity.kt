@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 import com.team4.anamnesis.R
+import com.team4.anamnesis.activity.editDeck.EDIT_DECK_REQUEST_CODE
 import com.team4.anamnesis.activity.editDeck.EditDeckActivity
 import com.team4.anamnesis.activity.studyMode.StudyModeActivity
 import com.team4.anamnesis.component.TextInputDialog
@@ -30,6 +31,20 @@ class GroupActivity : AppCompatActivity() {
     private val manager: GridLayoutManager = GridLayoutManager(this, 2)
     private lateinit var model: GroupModel
     private lateinit var recyclerView: RecyclerView
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        when (requestCode) {
+            EDIT_DECK_REQUEST_CODE -> {
+                if (resultCode == RESULT_OK && data != null) { // affirm to the user that the result was saved
+                    val deck: Deck = data.getSerializableExtra("deck") as Deck // the deck that was saved
+                    val snackbarText: String = String.format(resources.getString(R.string.group_snackbar_edit_success),
+                            deck.name)
+                    Snackbar.make(recyclerView, snackbarText, Snackbar.LENGTH_LONG)
+                            .show()
+                }
+            }
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -156,7 +171,7 @@ class GroupActivity : AppCompatActivity() {
     fun onDeckEditClicked(deck: Deck) {
         val intent = Intent(this, EditDeckActivity::class.java)
         intent.putExtra("deck", deck)
-        startActivity(intent)
+        startActivityForResult(intent, EDIT_DECK_REQUEST_CODE)
     }
 
 }

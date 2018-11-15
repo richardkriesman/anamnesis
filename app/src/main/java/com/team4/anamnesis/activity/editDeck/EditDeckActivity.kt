@@ -1,5 +1,6 @@
 package com.team4.anamnesis.activity.editDeck
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
@@ -19,6 +20,8 @@ import com.team4.anamnesis.db.entity.Deck
 import com.team4.anamnesis.db.entity.Flashcard
 import org.jetbrains.anko.doAsync
 
+const val EDIT_DECK_REQUEST_CODE = 1
+
 class EditDeckActivity : AppCompatActivity() {
 
     private val adapter: EditDeckAdapter = EditDeckAdapter(this)
@@ -33,8 +36,15 @@ class EditDeckActivity : AppCompatActivity() {
     private lateinit var rightButton: ImageView
     private lateinit var scrollIndicator: TextView
 
-    override fun onBackPressed() {
+    fun closeActivity() {
+        val intent = Intent()
+        intent.putExtra("deck", deck)
+        setResult(RESULT_OK, intent)
         finish()
+    }
+
+    override fun onBackPressed() {
+        closeActivity()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -105,7 +115,18 @@ class EditDeckActivity : AppCompatActivity() {
 
         // listen for changes to flashcards
         model.flashcards.observe(this, Observer {
+            val currentPosition: Int = manager.currentPosition // save current scroll position to restore later
+
+            // update data set
             adapter.setData(it)
+
+            // restore scroll position
+            val newPosition: Int = when {
+                currentPosition < it.size -> currentPosition
+                it.isNotEmpty()           -> it.size - 1
+                else                      -> 0
+            }
+            recyclerView.smoothScrollToPosition(newPosition)
 
             // show/hide empty text if empty
             if (it.isEmpty()) {
@@ -126,7 +147,7 @@ class EditDeckActivity : AppCompatActivity() {
 
             // initialize scroll indicator text
             scrollIndicator.text = String.format(resources.getString(R.string.edit_scroll_indicator_text),
-                    manager.currentPosition + 1, adapter.itemCount)
+                    newPosition + 1, it.size)
         })
 
     }
@@ -171,7 +192,7 @@ class EditDeckActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             android.R.id.home -> {
-                finish()
+                closeActivity()
                 true
             }
             else -> super.onOptionsItemSelected(item)

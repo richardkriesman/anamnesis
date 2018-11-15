@@ -26,8 +26,12 @@ class LinearPageLayoutManager(context: Context, orientation: Int, reverseLayout:
     var onPageChange: ((position: Int) -> Unit)? = null
 
     private val c: Context = context
+    private var isScrolling: Boolean = false // whether the page is currently scrolling
 
     override fun smoothScrollToPosition(recyclerView: RecyclerView?, state: RecyclerView.State?, position: Int) {
+        if (isScrolling) { // ignore requests to scroll if the page is currently scrolling
+            return
+        }
         super.smoothScrollToPosition(recyclerView, state, position)
 
         // create a SmoothScroller to handle the scrolling
@@ -55,6 +59,9 @@ class LinearPageLayoutManager(context: Context, orientation: Int, reverseLayout:
         if (state == RecyclerView.SCROLL_STATE_IDLE) {
             currentPosition = this.findFirstCompletelyVisibleItemPosition()
             onPageChange?.invoke(currentPosition)
+            isScrolling = false
+        } else {
+            isScrolling = true
         }
 
         super.onScrollStateChanged(state)

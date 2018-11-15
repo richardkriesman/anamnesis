@@ -34,6 +34,7 @@
     <string name="group_snackbar_deleted_deck">Deleted deck "%1$s"</string>
     <string name="group_empty_title">No flashcard decks</string>
     <string name="group_empty_subtitle">Add a flashcard deck to start studying a topic.</string>
+    <string name="group_snackbar_edit_success">Saved "%1$s"</string>
     <string name="item_deck_edit">Edit</string>
     <string name="item_deck_delete">Delete deck</string>
     <string name="title_activity_settings">Settings</string>

@@ -1,5 +1,7 @@
 package com.team4.anamnesis.activity.editDeck
 
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.DisplayMetrics
 import android.view.LayoutInflater
 import android.view.View
@@ -50,7 +52,9 @@ class EditDeckAdapter(context: AppCompatActivity): RecyclerView.Adapter<EditDeck
 
     fun setData(flashcards: List<Flashcard>) {
         this.flashcards = flashcards
-        notifyDataSetChanged()
+        if (this.flashcards.size != flashcards.size) { // card was added or removed, reload data set
+            notifyDataSetChanged()
+        }
     }
 
     inner class EditDeckHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
@@ -68,20 +72,44 @@ class EditDeckAdapter(context: AppCompatActivity): RecyclerView.Adapter<EditDeck
             }
 
             // handle top text change
-            topText.setOnFocusChangeListener { _, isFocused ->
-                if (!isFocused) {
-                    flashcard.frontText = topText.text.toString()
+            topText.addTextChangedListener(object: TextWatcher {
+
+                override fun afterTextChanged(p0: Editable?) {
+                    flashcard.frontText = p0?.toString() ?: ""
                     onFlashcardChanged?.invoke(flashcard)
                 }
-            }
+
+                override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+
+                override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+
+            })
+//            topText.setOnFocusChangeListener { _, isFocused ->
+//                if (!isFocused) {
+//                    flashcard.frontText = topText.text.toString()
+//                    onFlashcardChanged?.invoke(flashcard)
+//                }
+//            }
 
             // handle bottom text change
-            bottomText.setOnFocusChangeListener { _, isFocused ->
-                if (!isFocused) {8
-                    flashcard.backText = bottomText.text.toString()
+            bottomText.addTextChangedListener(object: TextWatcher {
+
+                override fun afterTextChanged(p0: Editable?) {
+                    flashcard.backText = p0?.toString() ?: ""
                     onFlashcardChanged?.invoke(flashcard)
                 }
-            }
+
+                override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+
+                override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+
+            })
+//            bottomText.setOnFocusChangeListener { _, isFocused ->
+//                if (!isFocused) {
+//                    flashcard.backText = bottomText.text.toString()
+//                    onFlashcardChanged?.invoke(flashcard)
+//                }
+//            }
 
         }
 
