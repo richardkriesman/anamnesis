@@ -28,6 +28,9 @@ import com.team4.anamnesis.component.TextInputDialogValidationListener
 import com.team4.anamnesis.db.AppDatabase
 import com.team4.anamnesis.db.entity.Group
 import org.jetbrains.anko.doAsync
+import android.preference.PreferenceActivity
+
+
 
 class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
@@ -224,6 +227,8 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     fun onDrawerSettingsClick(menuItem: MenuItem) {
         val intent = Intent(this, com.team4.anamnesis.SettingsActivity::class.java)
+        intent.putExtra(PreferenceActivity.EXTRA_SHOW_FRAGMENT, com.team4.anamnesis.SettingsActivity.GeneralPreferenceFragment::class.java.name)
+        intent.putExtra(PreferenceActivity.EXTRA_NO_HEADERS, true)
         startActivityFromHome(intent)
     }
 
