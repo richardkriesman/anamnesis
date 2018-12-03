@@ -21,12 +21,25 @@ class LinearPageLayoutManager(context: Context, orientation: Int, reverseLayout:
         }
 
     /**
+     * Whether scrolling is enabled. If disabled, the RecyclerView cannot be scrolled.
+     */
+    var isScrollingEnabled: Boolean = true
+
+    /**
      * A listener that fires when the page changes.
      */
     var onPageChange: ((position: Int) -> Unit)? = null
 
     private val c: Context = context
     private var isScrolling: Boolean = false // whether the page is currently scrolling
+
+    override fun canScrollHorizontally(): Boolean {
+        return super.canScrollHorizontally() && isScrollingEnabled
+    }
+
+    override fun canScrollVertically(): Boolean {
+        return super.canScrollVertically() && isScrollingEnabled
+    }
 
     override fun smoothScrollToPosition(recyclerView: RecyclerView?, state: RecyclerView.State?, position: Int) {
         if (isScrolling) { // ignore requests to scroll if the page is currently scrolling

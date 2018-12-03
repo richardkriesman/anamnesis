@@ -98,6 +98,7 @@
 
     <string name="study_correct">Correct</string>
     <string name="study_incorrect">Incorrect</string>
+    <string name="study__response_hint">Was your answer correct or incorrect?</string>
     <string name="title_activity_results">ResultsActivity</string>
 
 
