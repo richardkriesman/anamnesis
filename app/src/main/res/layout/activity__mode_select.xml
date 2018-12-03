@@ -66,8 +66,9 @@
         android:gravity="center_horizontal"
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mode_title" />
+        app:layout_constraintTop_toBottomOf="@+id/mode__icon" />
 
     <Button
         android:id="@+id/mode_start"
@@ -78,4 +79,15 @@
         android:text="@string/mode_start"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+
+    <ImageView
+        android:id="@+id/mode__icon"
+        android:layout_width="128dp"
+        android:layout_height="128dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mode_title" />
 </androidx.constraintlayout.widget.ConstraintLayout>

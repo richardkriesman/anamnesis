@@ -1,5 +1,6 @@
 package com.team4.anamnesis.activity.study
 
+import android.graphics.drawable.ColorDrawable
 import android.util.DisplayMetrics
 import android.view.LayoutInflater
 import android.view.View
@@ -11,7 +12,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.team4.anamnesis.R
 import com.team4.anamnesis.db.entity.Flashcard
 
-class StudyAdapter(context: AppCompatActivity): RecyclerView.Adapter<StudyAdapter.EditDeckHolder>() {
+class StudyAdapter(context: AppCompatActivity, isStealthMode: Boolean):
+        RecyclerView.Adapter<StudyAdapter.EditDeckHolder>() {
 
     /**
      * A listener that fires when the card face has been changed.
@@ -20,6 +22,7 @@ class StudyAdapter(context: AppCompatActivity): RecyclerView.Adapter<StudyAdapte
 
     private val c: AppCompatActivity = context
     private var flashcards: List<Flashcard> = ArrayList() // list of flashcards
+    private val isStealthModeEnabled: Boolean = isStealthMode
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EditDeckHolder {
         val view: View = LayoutInflater.from(c).inflate(R.layout.item__card_study, parent, false)
@@ -64,6 +67,18 @@ class StudyAdapter(context: AppCompatActivity): RecyclerView.Adapter<StudyAdapte
                 updateCardFace(flashcard)
                 onCardFaceChange?.invoke(flashcard, isBackFaceShowing)
             }
+
+            // change colors if in stealth mode
+            if (isStealthModeEnabled) {
+
+                // set background to black
+                card.background = ColorDrawable(c.resources.getColor(android.R.color.black, c.theme))
+
+                // set text to dark grey
+                text.setTextColor(c.resources.getColor(R.color.stealthModeAccent, c.theme))
+
+            }
+
         }
 
         /**

@@ -1,12 +1,16 @@
 package com.team4.anamnesis.activity.study
 
 import android.content.Intent
+import android.content.res.ColorStateList
+import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.view.WindowManager
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -27,7 +31,7 @@ enum class StudyMode(val id: Int) {
 
 class StudyActivity : AppCompatActivity() {
 
-    private val adapter: StudyAdapter = StudyAdapter(this)
+    private lateinit var adapter: StudyAdapter
     private lateinit var closeButton: ImageView
     private lateinit var correctButton: Button
     private lateinit var deck: Deck
@@ -40,6 +44,7 @@ class StudyActivity : AppCompatActivity() {
     private lateinit var remainingFlashcards: List<Flashcard>
     private lateinit var responseHint: TextView
     private lateinit var rightButton: ImageView
+    private lateinit var root: ConstraintLayout
     private var studyMode: Int = 0
 
     private var correctCount = 0
@@ -61,12 +66,14 @@ class StudyActivity : AppCompatActivity() {
         incorrectButton = findViewById(R.id.study_incorrect_button)
         closeButton = findViewById(R.id.study_close_button)
         responseHint = findViewById(R.id.study__response_hint)
+        root = findViewById(R.id.study__root)
 
         // instantiate ViewModel
         model = ViewModelProviders.of(this).get(FlashcardModel::class.java)
         model.load(deck)
 
         // instantiate RecyclerView
+        adapter = StudyAdapter(this, studyMode == StudyMode.STEALTH.id)
         recyclerView.adapter = adapter
         recyclerView.layoutManager = manager
         PagerSnapHelper().attachToRecyclerView(recyclerView)
@@ -74,6 +81,22 @@ class StudyActivity : AppCompatActivity() {
         // disable scrolling in scored mode
         if (studyMode == StudyMode.SCORED.id) {
             manager.isScrollingEnabled = false
+        }
+
+        // stealth mode modifications
+        if (studyMode == StudyMode.STEALTH.id) {
+
+            // change background to black
+            root.background = ColorDrawable(resources.getColor(android.R.color.black, theme))
+
+            // hide status bar
+            window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
+
+            // change buttons to light grey
+            closeButton.setColorFilter(resources.getColor(R.color.stealthModeAccent, theme))
+            leftButton.setColorFilter(resources.getColor(R.color.stealthModeAccent, theme))
+            rightButton.setColorFilter(resources.getColor(R.color.stealthModeAccent, theme))
+
         }
 
         // handle RecyclerView page changes

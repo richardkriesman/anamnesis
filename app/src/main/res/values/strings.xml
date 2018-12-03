@@ -78,9 +78,8 @@
     </string>
     <string name="mode_option_stealth">Stealth mode</string>
     <string name="mode_option_stealth_desc">
-        In stealth mode, you\'re shown your flashcards in order, and both sides are visible at the same time.
-        You aren\'t timed or scored, and can freely view any flashcard in the deck. The screen will change to a dark
-        theme so you can study without attracting attention.
+        In stealth mode, you\'re shown your flashcards in order. You aren\'t timed or scored, and can freely view any
+        flashcard in the deck. The screen will change to a dark theme so you can study without attracting attention.
     </string>
     <string name="mode_title_default">Select a study mode</string>
     <string name="mode_activity_title">Study "%1$s"</string>

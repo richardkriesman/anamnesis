@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.RadioGroup
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -17,6 +18,7 @@ class ModeSelectActivity : AppCompatActivity() {
     private lateinit var deck: Deck
     private lateinit var modeDesc: TextView
     private lateinit var modeTitle: TextView
+    private lateinit var modeIcon: ImageView
     private lateinit var radioGroup: RadioGroup
     private lateinit var startButton: Button
 
@@ -36,6 +38,7 @@ class ModeSelectActivity : AppCompatActivity() {
         // get views
         modeDesc = findViewById(R.id.mode_desc)
         modeTitle = findViewById(R.id.mode_title)
+        modeIcon = findViewById(R.id.mode__icon)
         radioGroup = findViewById(R.id.mode_radio_group)
         startButton = findViewById(R.id.mode_start)
 
@@ -45,14 +48,17 @@ class ModeSelectActivity : AppCompatActivity() {
                 R.id.mode_scored -> {
                     modeTitle.text = resources.getText(R.string.mode_option_scored)
                     modeDesc.text = resources.getText(R.string.mode_option_scored_desc)
+                    modeIcon.setImageDrawable(resources.getDrawable(R.drawable.ic_baseline_grade_24px, theme))
                 }
                 R.id.mode_unscored -> {
                     modeTitle.text = resources.getText(R.string.mode_option_unscored)
                     modeDesc.text = resources.getText(R.string.mode_option_unscored_desc)
+                    modeIcon.setImageDrawable(resources.getDrawable(R.drawable.ic_baseline_weekend_48px, theme))
                 }
                 R.id.mode_stealth -> {
                     modeTitle.text = resources.getText(R.string.mode_option_stealth)
                     modeDesc.text = resources.getText(R.string.mode_option_stealth_desc)
+                    modeIcon.setImageDrawable(resources.getDrawable(R.drawable.ic_baseline_incognito, theme))
                 }
             }
         }
