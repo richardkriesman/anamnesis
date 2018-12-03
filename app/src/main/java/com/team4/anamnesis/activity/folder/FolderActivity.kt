@@ -1,4 +1,4 @@
-package com.team4.anamnesis.activity.group
+package com.team4.anamnesis.activity.folder
 
 import android.content.Intent
 import android.os.Bundle
@@ -15,20 +15,21 @@ import com.team4.anamnesis.R
 import com.team4.anamnesis.activity.editDeck.EDIT_DECK_REQUEST_CODE
 import com.team4.anamnesis.activity.editDeck.EditDeckActivity
 import com.team4.anamnesis.activity.modeSelect.ModeSelectActivity
+import com.team4.anamnesis.component.ConfirmationDialog
 import com.team4.anamnesis.component.TextInputDialog
 import com.team4.anamnesis.component.TextInputDialogCompletedListener
 import com.team4.anamnesis.component.TextInputDialogValidationListener
 import com.team4.anamnesis.db.entity.Deck
-import com.team4.anamnesis.db.entity.Group
+import com.team4.anamnesis.db.entity.Folder
 import com.team4.anamnesis.db.viewModel.DeckModel
 import org.jetbrains.anko.doAsync
 
-class GroupActivity : AppCompatActivity() {
+class FolderActivity : AppCompatActivity() {
 
-    private val adapter: GroupDeckAdapter = GroupDeckAdapter(this)
+    private val adapter: FolderDeckAdapter = FolderDeckAdapter(this)
     private lateinit var emptyTitle: TextView
     private lateinit var emptySubtitle: TextView
-    private lateinit var group: Group
+    private lateinit var group: Folder
     private val manager: GridLayoutManager = GridLayoutManager(this, 2)
     private lateinit var model: DeckModel
     private lateinit var recyclerView: RecyclerView
@@ -38,7 +39,7 @@ class GroupActivity : AppCompatActivity() {
             EDIT_DECK_REQUEST_CODE -> {
                 if (resultCode == RESULT_OK && data != null) { // affirm to the user that the result was saved
                     val deck: Deck = data.getSerializableExtra("deck") as Deck // the deck that was saved
-                    val snackbarText: String = String.format(resources.getString(R.string.group__edit__snackbar),
+                    val snackbarText: String = String.format(resources.getString(R.string.folder__edit__snackbar),
                             deck.name)
                     Snackbar.make(recyclerView, snackbarText, Snackbar.LENGTH_LONG)
                             .show()
@@ -53,7 +54,7 @@ class GroupActivity : AppCompatActivity() {
         actionBar?.setDisplayHomeAsUpEnabled(true)
 
         // extract group from intent
-        group = intent.getSerializableExtra("group") as Group
+        group = intent.getSerializableExtra("group") as Folder
 
         // set activity title to group name
         title = group.name
@@ -111,8 +112,8 @@ class GroupActivity : AppCompatActivity() {
     fun onCreateDeckClicked(view: View) {
 
         // prompt the user to name the new deck
-        val dialog = TextInputDialog(this, R.string.group__new_deck__title,
-                R.string.group__new_deck__hint)
+        val dialog = TextInputDialog(this, R.string.folder__new_deck__title,
+                R.string.folder__new_deck__hint)
 
         // validate text input when the user taps "Ok"
         dialog.onValidateListener = object : TextInputDialogValidationListener() {
@@ -133,7 +134,7 @@ class GroupActivity : AppCompatActivity() {
                 }
 
                 // display a snackbar affirming the new deck was created
-                val snackbarText = String.format(resources.getString(R.string.group__new_deck__snackbar), text)
+                val snackbarText = String.format(resources.getString(R.string.folder__new_deck__snackbar), text)
                 Snackbar.make(view, snackbarText, Snackbar.LENGTH_LONG).show()
 
             }
@@ -158,9 +159,9 @@ class GroupActivity : AppCompatActivity() {
         }
 
         // show a snackbar about the deck being deleted
-        val snackbarText = String.format(resources.getString(R.string.group__delete_deck__snackbar), deck.name)
+        val snackbarText = String.format(resources.getString(R.string.folder__delete_deck__snackbar), deck.name)
         Snackbar.make(recyclerView, snackbarText, Snackbar.LENGTH_LONG)
-                .setAction(R.string.home__deleted_group__snackbar_action) {
+                .setAction(R.string.home__deleted_folder__snackbar_action) {
                     doAsync {
                         model.createDeck(deck) // user clicked undo button, recreate the deck
                     }

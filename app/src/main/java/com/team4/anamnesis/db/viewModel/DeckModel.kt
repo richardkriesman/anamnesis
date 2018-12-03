@@ -4,12 +4,12 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.team4.anamnesis.db.AppDatabase
 import com.team4.anamnesis.db.entity.Deck
-import com.team4.anamnesis.db.entity.Group
+import com.team4.anamnesis.db.entity.Folder
 
 class DeckModel: ViewModel() {
     lateinit var decks: LiveData<List<Deck>>
 
-    fun load(group: Group) {
+    fun load(group: Folder) {
         decks = AppDatabase.instance!!.deckDao().getByGroupId(group.id)
     }
 

@@ -8,8 +8,8 @@ import java.io.Serializable
 /**
  * A grouping of flashcard decks, usually by subject.
  */
-@Entity(tableName = "group")
-data class Group(
+@Entity(tableName = "folder")
+data class Folder(
         @PrimaryKey(autoGenerate = true) var id: Int = 0,
         @ColumnInfo(name = "name") var name: String
 ): Serializable

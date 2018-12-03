@@ -1,4 +1,4 @@
-package com.team4.anamnesis.activity.group
+package com.team4.anamnesis.activity.folder
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.team4.anamnesis.R
 import com.team4.anamnesis.db.entity.Deck
 
-class GroupDeckAdapter(context: Context): RecyclerView.Adapter<GroupDeckAdapter.GroupDeckHolder>() {
+class FolderDeckAdapter(context: Context): RecyclerView.Adapter<FolderDeckAdapter.GroupDeckHolder>() {
 
     /**
      * A listener that fires when a deck is clicked.

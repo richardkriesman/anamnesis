@@ -3,8 +3,8 @@
 
     <item
         android:id="@+id/menu_deck_edit"
-        android:title="@string/group__item__edit" />
+        android:title="@string/folder__item__edit" />
     <item
         android:id="@+id/menu_deck_delete"
-        android:title="@string/group__item__delete" />
+        android:title="@string/folder__item__delete" />
 </menu>

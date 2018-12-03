@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/cardLayoutBackground"
-    tools:context=".activity.group.GroupActivity">
+    tools:context=".activity.folder.FolderActivity">
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
@@ -43,7 +43,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        android:text="@string/group__empty_title"
+        android:text="@string/folder__empty_title"
         android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
         app:layout_constraintBottom_toTopOf="@+id/guideline2"
         app:layout_constraintEnd_toEndOf="parent"
@@ -54,7 +54,7 @@
         android:layout_width="192dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="@string/group__empty_subtitle"
+        android:text="@string/folder__empty_subtitle"
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
         app:layout_constraintEnd_toEndOf="@+id/group_empty_title"

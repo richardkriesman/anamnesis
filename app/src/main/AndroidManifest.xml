@@ -23,15 +23,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activity.settings.OldSettingsActivity"
-            android:label="@string/settings__title"
-            android:parentActivityName=".activity.home.HomeActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.team4.anamnesis.activity.home.HomeActivity" />
-        </activity>
-        <activity
-            android:name=".activity.group.GroupActivity"
+            android:name=".activity.folder.FolderActivity"
             android:parentActivityName=".activity.home.HomeActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -39,19 +31,19 @@
         </activity>
         <activity
             android:name=".activity.modeSelect.ModeSelectActivity"
-            android:parentActivityName=".activity.group.GroupActivity">
+            android:parentActivityName=".activity.folder.FolderActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.team4.anamnesis.activity.group.GroupActivity" />
+                android:value="com.team4.anamnesis.activity.folder.FolderActivity" />
         </activity>
         <activity
             android:name=".activity.editDeck.EditDeckActivity"
             android:label="@string/title_activity_edit_deck"
-            android:parentActivityName=".activity.group.GroupActivity"
+            android:parentActivityName=".activity.folder.FolderActivity"
             android:windowSoftInputMode="adjustResize">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.team4.anamnesis.activity.group.GroupActivity" />
+                android:value="com.team4.anamnesis.activity.folder.FolderActivity" />
         </activity>
         <activity
             android:name=".activity.study.StudyActivity"

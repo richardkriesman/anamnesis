@@ -14,32 +14,35 @@
     <string name="home__nav__subtitle">Team 4</string>
     <string name="home__nav__desc">Navigation header</string>
     <string name="home__nav__settings">Settings</string>
-    <string name="home__new_group__title">New group</string>
-    <string name="home__new_group__hint">Name</string>
-    <string name="home__rename_group__title">Rename group</string>
-    <string name="home__new_group__snackbar">Created group "%1$s"</string>
-    <string name="home__renamed_group__snackbar">Renamed group "%1$s" to "%2$s"</string>
-    <string name="home__deleted_group__snackbar">Deleted group "%1$s"</string>
-    <string name="home__deleted_group__snackbar_action">Undo</string>
-    <string name="home__empty_title">No groups</string>
-    <string name="home__empty_subtitle">Add a group to organize your flashcard decks.</string>
+    <string name="home__new_folder__title">New folder</string>
+    <string name="home__new_folder__hint">Name</string>
+    <string name="home__rename_folder__title">Rename folder</string>
+    <string name="home__new_folder__snackbar">Created folder "%1$s"</string>
+    <string name="home__renamed_folder__snackbar">Renamed folder "%1$s" to "%2$s"</string>
+    <string name="home__deleted_folder__snackbar">Deleted folder "%1$s"</string>
+    <string name="home__deleted_folder__snackbar_action">Undo</string>
+    <string name="home__delete_folder__title">Delete folder?</string>
+    <string name="home__delete_folder__positive">Delete</string>
+    <string name="home__delete_folder__negative">Cancel</string>
+    <string name="home__empty_title">No folders</string>
+    <string name="home__empty_subtitle">Add a folder to organize your flashcard decks.</string>
     <string name="home__item__rename">Rename</string>
-    <string name="home__item__delete">Delete group</string>
+    <string name="home__item__delete">Delete folder</string>
 
     <!-- TextInputDialog component -->
     <string name="textinputdialog__button__negative">Cancel</string>
     <string name="textinputdialog__button__positive">OK</string>
 
-    <!-- Group -->
-    <string name="group__new_deck__title">New deck</string>
-    <string name="group__new_deck__hint">Name</string>
-    <string name="group__new_deck__snackbar">Created deck "%1$s"</string>
-    <string name="group__delete_deck__snackbar">Deleted deck "%1$s"</string>
-    <string name="group__empty_title">No flashcard decks</string>
-    <string name="group__empty_subtitle">Add a flashcard deck to start studying a topic.</string>
-    <string name="group__edit__snackbar">Saved "%1$s"</string>
-    <string name="group__item__edit">Edit</string>
-    <string name="group__item__delete">Delete deck</string>
+    <!-- Folder -->
+    <string name="folder__new_deck__title">New deck</string>
+    <string name="folder__new_deck__hint">Name</string>
+    <string name="folder__new_deck__snackbar">Created deck "%1$s"</string>
+    <string name="folder__delete_deck__snackbar">Deleted deck "%1$s"</string>
+    <string name="folder__empty_title">No flashcard decks</string>
+    <string name="folder__empty_subtitle">Add a flashcard deck to start studying a topic.</string>
+    <string name="folder__edit__snackbar">Saved "%1$s"</string>
+    <string name="folder__item__edit">Edit</string>
+    <string name="folder__item__delete">Delete deck</string>
 
     <!-- Settings -->
     <string name="settings__title">Settings</string>
@@ -62,74 +65,6 @@
         <item>20 pt</item>
         <item>24 pt</item>
     </string-array>
-
-    <string name="pref_title_add_friends_to_messages">Font size</string>
-    <string-array name="pref_example_list_titles">
-        <item>12</item>
-        <item>14</item>
-        <item>16</item>
-        <item>20</item>
-        <item>24</item>
-    </string-array>
-    <string-array name="pref_example_list_values">
-        <item>12</item>
-        <item>14</item>
-        <item>16</item>
-        <item>20</item>
-        <item>24</item>
-    </string-array>
-
-    <!-- Example settings for Data & Sync -->
-    <string name="pref_header_data_sync">Data &amp; sync</string>
-
-    <string name="pref_title_sync_frequency">Sync frequency</string>
-    <string-array name="pref_sync_frequency_titles">
-        <item>15 minutes</item>
-        <item>30 minutes</item>
-        <item>1 hour</item>
-        <item>3 hours</item>
-        <item>6 hours</item>
-        <item>Never</item>
-    </string-array>
-    <string-array name="pref_sync_frequency_values">
-        <item>15</item>
-        <item>30</item>
-        <item>60</item>
-        <item>180</item>
-        <item>360</item>
-        <item>-1</item>
-    </string-array>
-
-    <string-array name="list_preference_entries">
-        <item>Entry 1</item>
-        <item>Entry 2</item>
-        <item>Entry 3</item>
-    </string-array>
-
-    <string-array name="list_preference_entry_values">
-        <item>1</item>
-        <item>2</item>
-        <item>3</item>
-    </string-array>
-
-    <string-array name="multi_select_list_preference_default_value" />
-
-    <string name="pref_title_system_sync_settings">System sync settings</string>
-
-    <string name="pref_description_social_recommendations" />
-    <string name="pref_title_social_recommendations" />
-    <string name="pref_default_display_name" />
-    <string name="pref_title_display_name" />
-
-    <!-- Example settings for Notifications -->
-    <string name="pref_header_notifications">Notifications</string>
-
-    <string name="pref_title_new_message_notifications">New message notifications</string>
-
-    <string name="pref_title_ringtone">Ringtone</string>
-    <string name="pref_ringtone_silent">Silent</string>
-
-    <string name="pref_title_vibrate">Vibrate</string>
 
     <string name="mode_option_scored">Scored mode</string>
     <string name="mode_option_scored_desc">

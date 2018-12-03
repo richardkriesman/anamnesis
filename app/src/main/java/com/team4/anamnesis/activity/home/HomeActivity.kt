@@ -19,17 +19,13 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar
 import com.team4.anamnesis.R
-import com.team4.anamnesis.activity.group.GroupActivity
-import com.team4.anamnesis.component.TextInputDialog
-import com.team4.anamnesis.component.TextInputDialogCompletedListener
-import com.team4.anamnesis.component.TextInputDialogValidationListener
+import com.team4.anamnesis.activity.folder.FolderActivity
 import com.team4.anamnesis.db.AppDatabase
-import com.team4.anamnesis.db.entity.Group
+import com.team4.anamnesis.db.entity.Folder
 import org.jetbrains.anko.doAsync
-import android.preference.PreferenceActivity
-import com.team4.anamnesis.activity.settings.OldSettingsActivity
 import com.team4.anamnesis.activity.settings.SettingsActivity
-import com.team4.anamnesis.db.viewModel.GroupModel
+import com.team4.anamnesis.component.*
+import com.team4.anamnesis.db.viewModel.FolderModel
 
 
 class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
@@ -39,7 +35,7 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     private lateinit var emptyTitle: TextView
     private lateinit var emptySubtitle: TextView
     private val manager: GridLayoutManager = GridLayoutManager(this, 2)
-    private lateinit var model: GroupModel
+    private lateinit var model: FolderModel
     private lateinit var recyclerView: RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -52,7 +48,7 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         AppDatabase.init(applicationContext)
 
         // instantiate ViewModel
-        model = ViewModelProviders.of(this).get(GroupModel::class.java)
+        model = ViewModelProviders.of(this).get(FolderModel::class.java)
 
         // instantiate navigation view
         val navigationView = findViewById<NavigationView>(R.id.nav_view)
@@ -124,34 +120,46 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }
     }
 
-    fun onCardClicked(group: Group) {
-        val intent = Intent(this, GroupActivity::class.java)
+    fun onCardClicked(group: Folder) {
+        val intent = Intent(this, FolderActivity::class.java)
         intent.putExtra("group", group)
         startActivity(intent)
     }
 
-    fun onCardDeleteClicked(group: Group) {
+    fun onCardDeleteClicked(group: Folder) {
 
-        // delete the group
-        doAsync {
-            model.deleteGroup(group)
+        // prompt for confirmation
+        val dialog = ConfirmationDialog(this, R.string.home__delete_folder__title,
+                R.string.home__delete_folder__positive, R.string.home__delete_folder__negative)
+
+        // handle confirmation
+        dialog.onConfirmedListener = object : ConfirmationDialogConfirmedListener() {
+            override fun onComplete() {
+
+                // delete the group
+                doAsync {
+                    model.deleteFolder(group)
+                }
+
+                // show a snackbar about the group being deleted
+                val snackbarText = String.format(resources.getString(R.string.home__deleted_folder__snackbar), group.name)
+                Snackbar.make(recyclerView, snackbarText, Snackbar.LENGTH_LONG)
+                        .setAction(R.string.home__deleted_folder__snackbar_action) {
+                            doAsync {
+                                model.createFolder(group) // user clicked undo button, recreate the group
+                            }
+                        }
+                        .show()
+
+            }
         }
 
-        // show a snackbar about the group being deleted
-        val snackbarText = String.format(resources.getString(R.string.home__deleted_group__snackbar), group.name)
-        Snackbar.make(recyclerView, snackbarText, Snackbar.LENGTH_LONG)
-                .setAction(R.string.home__deleted_group__snackbar_action) {
-                    doAsync {
-                        model.createGroup(group) // user clicked undo button, recreate the group
-                    }
-                }
-                .show()
-
+        dialog.show()
     }
 
-    fun onCardRenameClicked(group: Group) {
-        val dialog = TextInputDialog(this, R.string.home__rename_group__title,
-                R.string.home__new_group__hint)
+    fun onCardRenameClicked(group: Folder) {
+        val dialog = TextInputDialog(this, R.string.home__rename_folder__title,
+                R.string.home__new_folder__hint)
 
         // validate text input when the user taps "Ok"
         dialog.onValidateListener = object : TextInputDialogValidationListener() {
@@ -169,11 +177,11 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 val oldName: String = group.name
                 group.name = text
                 doAsync {
-                    model.updateGroup(group)
+                    model.updateFolder(group)
                 }
 
                 // display a snackbar affirming the new deck was created
-                val snackbarText = String.format(resources.getString(R.string.home__renamed_group__snackbar), oldName,
+                val snackbarText = String.format(resources.getString(R.string.home__renamed_folder__snackbar), oldName,
                         text)
                 Snackbar.make(recyclerView, snackbarText, Snackbar.LENGTH_LONG).show()
 
@@ -187,8 +195,8 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     fun onCreateGroupClicked(view: View) {
 
         // prompt the user to name the new group
-        val dialog = TextInputDialog(this@HomeActivity, R.string.home__new_group__title,
-                R.string.home__new_group__hint)
+        val dialog = TextInputDialog(this@HomeActivity, R.string.home__new_folder__title,
+                R.string.home__new_folder__hint)
 
         // validate text input when the user taps "Ok"
         dialog.onValidateListener = object : TextInputDialogValidationListener() {
@@ -203,13 +211,13 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             override fun onComplete(text: String) { // we now have the name of the group
 
                 // create a new group
-                val group = Group(name = text)
+                val group = Folder(name = text)
                 doAsync {
-                    model.createGroup(group)
+                    model.createFolder(group)
                 }
 
                 // display a snackbar affirming the new deck was created
-                val snackbarText = String.format(resources.getString(R.string.home__new_group__snackbar), text)
+                val snackbarText = String.format(resources.getString(R.string.home__new_folder__snackbar), text)
                 Snackbar.make(view, snackbarText, Snackbar.LENGTH_LONG).setAction("Action", null).show()
 
             }

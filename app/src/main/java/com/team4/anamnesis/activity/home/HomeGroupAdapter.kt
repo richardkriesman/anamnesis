@@ -10,34 +10,34 @@ import androidx.appcompat.widget.PopupMenu
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.team4.anamnesis.R
-import com.team4.anamnesis.db.entity.Group
+import com.team4.anamnesis.db.entity.Folder
 
 class HomeGroupAdapter(context: Context): RecyclerView.Adapter<HomeGroupAdapter.HomeGroupHolder>() {
 
     /**
      * A listener that fires when a group card is clicked.
      */
-    var onGroupClicked: ((group: Group) -> Unit)? = null
+    var onGroupClicked: ((group: Folder) -> Unit)? = null
 
     /**
      * A listener that fires when the user clicks the "delete" menu item.
      */
-    var onGroupDeleteClicked: ((group: Group) -> Unit)? = null
+    var onGroupDeleteClicked: ((group: Folder) -> Unit)? = null
 
     /**
      * A listener that fires when the user clicks the "rename" menu item.
      */
-    var onGroupRenameClicked: ((group: Group) -> Unit)? = null
+    var onGroupRenameClicked: ((group: Folder) -> Unit)? = null
 
     private val c: Context = context // the kotlin compiler won't let us access context
-    private var groups: List<Group> = ArrayList() // list of flashcard groups
+    private var groups: List<Folder> = ArrayList() // list of flashcard groups
 
     override fun getItemCount(): Int {
         return groups.size
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeGroupHolder {
-        val view: View = LayoutInflater.from(c).inflate(R.layout.item__group, parent, false)
+        val view: View = LayoutInflater.from(c).inflate(R.layout.item__folder, parent, false)
         return HomeGroupHolder(view)
     }
 
@@ -48,17 +48,17 @@ class HomeGroupAdapter(context: Context): RecyclerView.Adapter<HomeGroupAdapter.
     /**
      * Replace the set of groups.
      */
-    fun setData(groups: List<Group>) {
+    fun setData(groups: List<Folder>) {
         this.groups = groups
         notifyDataSetChanged()
     }
 
     inner class HomeGroupHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
-        private var cardView: CardView = itemView.findViewById(R.id.item_group_card)
-        private var menuButton: ImageView = itemView.findViewById(R.id.item_group_menu)
+        private var cardView: CardView = itemView.findViewById(R.id.item_folder_card)
+        private var menuButton: ImageView = itemView.findViewById(R.id.item_folder_menu)
         private var textView: TextView = itemView.findViewById(R.id.item_group_text)
 
-        fun bind(group: Group) {
+        fun bind(group: Folder) {
             textView.text = group.name
 
             // listen for clicks on the card

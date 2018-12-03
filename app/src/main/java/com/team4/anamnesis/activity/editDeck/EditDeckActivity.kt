@@ -176,7 +176,7 @@ class EditDeckActivity : AppCompatActivity() {
 
         // display a snackbar confirming the deletion
         Snackbar.make(recyclerView, R.string.edit_snackbar_card_deleted, Snackbar.LENGTH_LONG)
-                .setAction(R.string.home__deleted_group__snackbar_action) {
+                .setAction(R.string.home__deleted_folder__snackbar_action) {
                     doAsync {
                         model.createFlashcard(flashcard)
                     }
