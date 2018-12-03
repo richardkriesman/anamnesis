@@ -2,6 +2,7 @@ package com.team4.anamnesis.activity.study
 
 import android.graphics.drawable.ColorDrawable
 import android.util.DisplayMetrics
+import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,6 +15,15 @@ import com.team4.anamnesis.db.entity.Flashcard
 
 class StudyAdapter(context: AppCompatActivity, isStealthMode: Boolean):
         RecyclerView.Adapter<StudyAdapter.EditDeckHolder>() {
+
+    /**
+     * Font size of a flashcard's text.
+     */
+    var fontSize: Int = 12
+        set(value) {
+            field = value
+            notifyDataSetChanged()
+        }
 
     /**
      * A listener that fires when the card face has been changed.
@@ -60,6 +70,9 @@ class StudyAdapter(context: AppCompatActivity, isStealthMode: Boolean):
 
             // show front/back card face
             updateCardFace(flashcard)
+
+            // set font size
+            text.setTextSize(TypedValue.COMPLEX_UNIT_SP, fontSize.toFloat())
 
             // handle card taps
             card.setOnClickListener {

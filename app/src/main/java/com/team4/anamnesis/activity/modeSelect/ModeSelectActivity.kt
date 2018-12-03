@@ -66,7 +66,6 @@ class ModeSelectActivity : AppCompatActivity() {
         // handle start button
         startButton.setOnClickListener {
             val intent = Intent(this, StudyActivity::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK.or(Intent.FLAG_ACTIVITY_CLEAR_TASK)
             intent.putExtra("deck", deck)
             when (radioGroup.checkedRadioButtonId) { // add intent extra specifying the type of study
                 R.id.mode_scored -> intent.putExtra("mode", StudyMode.SCORED.id)

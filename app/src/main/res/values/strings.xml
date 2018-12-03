@@ -100,5 +100,10 @@
     <string name="study__response_hint">Was your answer correct or incorrect?</string>
     <string name="title_activity_results">ResultsActivity</string>
 
+    <string name="results__ratio">"%1$d" / "%2$d"</string>
+    <string name="results__units">answers correct</string>
+    <string name="results__time">"%1$s" elapsed</string>
+    <string name="results__finish">Finish</string>
+
 
 </resources>

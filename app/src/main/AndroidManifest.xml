@@ -18,6 +18,7 @@
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -48,18 +49,20 @@
         </activity>
         <activity
             android:name=".activity.study.StudyActivity"
-            android:theme="@style/AppTheme.NoActionBar.StudyMode" />
+            android:theme="@style/AppTheme.NoActionBar.StudyMode"
+            android:noHistory="true" />
         <activity
             android:name=".activity.study.ResultsActivity"
             android:label="@string/title_activity_results"
-            android:parentActivityName=".activity.home.HomeActivity">
+            android:parentActivityName=".activity.home.HomeActivity"
+            android:theme="@style/AppTheme.NoActionBar.StudyMode">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.team4.anamnesis.activity.home.HomeActivity" />
         </activity>
         <activity
             android:name=".activity.settings.SettingsActivity"
-            android:label="@string/settings__title" >
+            android:label="@string/settings__title">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.team4.anamnesis.activity.home.HomeActivity" />
