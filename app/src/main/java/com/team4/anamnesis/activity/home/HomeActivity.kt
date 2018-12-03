@@ -40,7 +40,7 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity__home)
+        setContentView(R.layout.layout__drawer)
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
 
@@ -70,7 +70,7 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         toggle.syncState()
         navigationView.setNavigationItemSelectedListener(this)
 
-        // instantiate recyclerview
+        // instantiate RecyclerView
         recyclerView = findViewById(R.id.home_recyclerview)
         recyclerView.adapter = adapter
         recyclerView.layoutManager = manager

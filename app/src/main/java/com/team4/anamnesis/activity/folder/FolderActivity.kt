@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
@@ -15,7 +16,6 @@ import com.team4.anamnesis.R
 import com.team4.anamnesis.activity.editDeck.EDIT_DECK_REQUEST_CODE
 import com.team4.anamnesis.activity.editDeck.EditDeckActivity
 import com.team4.anamnesis.activity.modeSelect.ModeSelectActivity
-import com.team4.anamnesis.component.ConfirmationDialog
 import com.team4.anamnesis.component.TextInputDialog
 import com.team4.anamnesis.component.TextInputDialogCompletedListener
 import com.team4.anamnesis.component.TextInputDialogValidationListener
@@ -26,6 +26,7 @@ import org.jetbrains.anko.doAsync
 
 class FolderActivity : AppCompatActivity() {
 
+    private lateinit var actionHint: TextView
     private val adapter: FolderDeckAdapter = FolderDeckAdapter(this)
     private lateinit var emptyTitle: TextView
     private lateinit var emptySubtitle: TextView
@@ -49,9 +50,13 @@ class FolderActivity : AppCompatActivity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        setTheme(R.style.AppTheme_NoActionBar)
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity__group)
-        actionBar?.setDisplayHomeAsUpEnabled(true)
+        setContentView(R.layout.toolbar__folder)
+        val toolbar = findViewById<Toolbar>(R.id.toolbar)
+        setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayShowHomeEnabled(true)
 
         // extract group from intent
         group = intent.getSerializableExtra("group") as Folder
@@ -69,7 +74,8 @@ class FolderActivity : AppCompatActivity() {
             onCreateDeckClicked(view)
         }
 
-        // instantiate recyclerview
+        // instantiate RecyclerView
+        actionHint = findViewById(R.id.group__action_hint)
         recyclerView = findViewById(R.id.group_recyclerview)
         recyclerView.adapter = adapter
         recyclerView.layoutManager = manager
@@ -97,10 +103,12 @@ class FolderActivity : AppCompatActivity() {
 
             // show/hide empty text if empty
             if (it.isEmpty()) {
+                actionHint.visibility = View.GONE
                 emptyTitle.visibility = View.VISIBLE
                 emptySubtitle.visibility = View.VISIBLE
                 recyclerView.visibility = View.GONE
             } else {
+                actionHint.visibility = View.VISIBLE
                 emptyTitle.visibility = View.GONE
                 emptySubtitle.visibility = View.GONE
                 recyclerView.visibility = View.VISIBLE
@@ -118,8 +126,7 @@ class FolderActivity : AppCompatActivity() {
         // validate text input when the user taps "Ok"
         dialog.onValidateListener = object : TextInputDialogValidationListener() {
             override fun onValidate(text: String): String? {
-                return if (text.isNotEmpty())
-                    null else "Type a name"
+                return if (text.isNotEmpty()) null else "Type a name"
             }
         }
 
@@ -133,9 +140,10 @@ class FolderActivity : AppCompatActivity() {
                     model.createDeck(deck)
                 }
 
-                // display a snackbar affirming the new deck was created
-                val snackbarText = String.format(resources.getString(R.string.folder__new_deck__snackbar), text)
-                Snackbar.make(view, snackbarText, Snackbar.LENGTH_LONG).show()
+                // open the edit screen for the deck
+                val intent = Intent(this@FolderActivity, EditDeckActivity::class.java)
+                intent.putExtra("deck", deck)
+                startActivityForResult(intent, EDIT_DECK_REQUEST_CODE)
 
             }
         }

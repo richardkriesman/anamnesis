@@ -36,13 +36,13 @@
     <!-- Folder -->
     <string name="folder__new_deck__title">New deck</string>
     <string name="folder__new_deck__hint">Name</string>
-    <string name="folder__new_deck__snackbar">Created deck "%1$s"</string>
     <string name="folder__delete_deck__snackbar">Deleted deck "%1$s"</string>
     <string name="folder__empty_title">No flashcard decks</string>
     <string name="folder__empty_subtitle">Add a flashcard deck to start studying a topic.</string>
     <string name="folder__edit__snackbar">Saved "%1$s"</string>
     <string name="folder__item__edit">Edit</string>
     <string name="folder__item__delete">Delete deck</string>
+    <string name="folder__action_hint">Tap a flashcard deck to start studying.</string>
 
     <!-- Settings -->
     <string name="settings__title">Settings</string>

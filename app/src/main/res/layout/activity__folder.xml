@@ -5,18 +5,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/cardLayoutBackground"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".activity.folder.FolderActivity">
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab"
+    <TextView
+        android:id="@+id/group__action_hint"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
         android:layout_marginBottom="16dp"
-        android:clickable="true"
+        android:text="@string/folder__action_hint"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Hint"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/ic_baseline_add_24px" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/group_recyclerview"
@@ -54,10 +55,12 @@
         android:layout_width="192dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
+        android:gravity="center_horizontal"
         android:text="@string/folder__empty_subtitle"
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
         app:layout_constraintEnd_toEndOf="@+id/group_empty_title"
         app:layout_constraintStart_toStartOf="@+id/group_empty_title"
         app:layout_constraintTop_toTopOf="@+id/guideline2" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

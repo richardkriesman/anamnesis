@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/cardLayoutBackground"
     tools:context=".activity.home.HomeActivity">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -20,7 +21,7 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <include layout="@layout/content__home" />
+    <include layout="@layout/activity__home" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
