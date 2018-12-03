@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
@@ -19,13 +18,10 @@ import com.team4.anamnesis.activity.modeSelect.ModeSelectActivity
 import com.team4.anamnesis.component.TextInputDialog
 import com.team4.anamnesis.component.TextInputDialogCompletedListener
 import com.team4.anamnesis.component.TextInputDialogValidationListener
-import com.team4.anamnesis.db.AppDatabase
 import com.team4.anamnesis.db.entity.Deck
-import com.team4.anamnesis.db.entity.Flashcard
 import com.team4.anamnesis.db.entity.Group
 import com.team4.anamnesis.db.viewModel.DeckModel
 import org.jetbrains.anko.doAsync
-import org.jetbrains.anko.uiThread
 
 class GroupActivity : AppCompatActivity() {
 
@@ -42,7 +38,7 @@ class GroupActivity : AppCompatActivity() {
             EDIT_DECK_REQUEST_CODE -> {
                 if (resultCode == RESULT_OK && data != null) { // affirm to the user that the result was saved
                     val deck: Deck = data.getSerializableExtra("deck") as Deck // the deck that was saved
-                    val snackbarText: String = String.format(resources.getString(R.string.group_snackbar_edit_success),
+                    val snackbarText: String = String.format(resources.getString(R.string.group__edit__snackbar),
                             deck.name)
                     Snackbar.make(recyclerView, snackbarText, Snackbar.LENGTH_LONG)
                             .show()
@@ -53,7 +49,7 @@ class GroupActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_group)
+        setContentView(R.layout.activity__group)
         actionBar?.setDisplayHomeAsUpEnabled(true)
 
         // extract group from intent
@@ -115,8 +111,8 @@ class GroupActivity : AppCompatActivity() {
     fun onCreateDeckClicked(view: View) {
 
         // prompt the user to name the new deck
-        val dialog = TextInputDialog(this, R.string.group_dialog_new_deck_title,
-                R.string.group_dialog_new_group_hint)
+        val dialog = TextInputDialog(this, R.string.group__new_deck__title,
+                R.string.group__new_deck__hint)
 
         // validate text input when the user taps "Ok"
         dialog.onValidateListener = object : TextInputDialogValidationListener() {
@@ -137,7 +133,7 @@ class GroupActivity : AppCompatActivity() {
                 }
 
                 // display a snackbar affirming the new deck was created
-                val snackbarText = String.format(resources.getString(R.string.group_snackbar_new_deck), text)
+                val snackbarText = String.format(resources.getString(R.string.group__new_deck__snackbar), text)
                 Snackbar.make(view, snackbarText, Snackbar.LENGTH_LONG).show()
 
             }
@@ -162,9 +158,9 @@ class GroupActivity : AppCompatActivity() {
         }
 
         // show a snackbar about the deck being deleted
-        val snackbarText = String.format(resources.getString(R.string.group_snackbar_deleted_deck), deck.name)
+        val snackbarText = String.format(resources.getString(R.string.group__delete_deck__snackbar), deck.name)
         Snackbar.make(recyclerView, snackbarText, Snackbar.LENGTH_LONG)
-                .setAction(R.string.home_snackbar_deleted_group_action) {
+                .setAction(R.string.home__deleted_group__snackbar_action) {
                     doAsync {
                         model.createDeck(deck) // user clicked undo button, recreate the deck
                     }

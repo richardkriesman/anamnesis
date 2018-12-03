@@ -76,13 +76,13 @@ class TextInputDialog(context: Context, title: Int, hint: Int) {
         builder.setView(inputLayout)
 
         // create positive action button
-        val positiveButtonText: String = context.resources.getString(R.string.textinputdialog_button_positive)
+        val positiveButtonText: String = context.resources.getString(R.string.textinputdialog__button__positive)
         builder.setPositiveButton(positiveButtonText) { _, _ ->
             run {}
         }
 
         // create negative action button
-        val negativeButtonText: String = context.resources.getString(R.string.textinputdialog_button_negative)
+        val negativeButtonText: String = context.resources.getString(R.string.textinputdialog__button__negative)
         builder.setNegativeButton(negativeButtonText) { dialogInterface, _ ->
             run {
                 dialogInterface.cancel()

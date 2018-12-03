@@ -7,15 +7,10 @@ import android.widget.Button
 import android.widget.RadioGroup
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.LiveData
 import com.team4.anamnesis.R
 import com.team4.anamnesis.activity.study.StudyActivity
 import com.team4.anamnesis.activity.study.StudyMode
-import com.team4.anamnesis.db.AppDatabase
 import com.team4.anamnesis.db.entity.Deck
-import com.team4.anamnesis.db.entity.Flashcard
-import org.jetbrains.anko.doAsync
-import org.jetbrains.anko.uiThread
 
 class ModeSelectActivity : AppCompatActivity() {
 
@@ -31,7 +26,7 @@ class ModeSelectActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_mode_select)
+        setContentView(R.layout.activity__mode_select)
         actionBar?.setDisplayHomeAsUpEnabled(true)
 
         // extract deck from intent

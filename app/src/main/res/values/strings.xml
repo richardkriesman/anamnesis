@@ -1,45 +1,50 @@
 <resources>
-    <string name="app_name">Anamnesis</string>
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">Anamnesis</string>
-    <string name="nav_header_subtitle">Team 4</string>
-    <string name="nav_header_desc">Navigation header</string>
-    <string name="action_settings">Settings</string>
-    <string name="welcome">Welcome to Anamnesis</string>
-    <string name="settings_title">Settings</string>
 
-    <string name="textinputdialog_button_negative">Cancel</string>
-    <string name="textinputdialog_button_positive">OK</string>
+    <!--
+        Please check naming-conventions.txt for the string naming convention!
+    -->
 
-    <string name="drawer_settings">Settings</string>
+    <!-- Global strings -->
+    <string name="app__name">Anamnesis</string>
 
-    <string name="home_dialog_new_group_title">New group</string>
-    <string name="home_dialog_new_group_hint">Name</string>
-    <string name="home_dialog_rename_group_title">Rename group</string>
-    <string name="home_snackbar_new_group">Created group "%1$s"</string>
-    <string name="home_snackbar_renamed_group">Renamed group "%1$s" to "%2$s"</string>
-    <string name="home_snackbar_deleted_group">Deleted group "%1$s"</string>
-    <string name="home_snackbar_deleted_group_action">Undo</string>
-    <string name="home_empty_title">No groups</string>
-    <string name="home_empty_subtitle">Add a group to organize your flashcard decks.</string>
-    <string name="item_group_rename">Rename</string>
-    <string name="item_group_delete">Delete group</string>
+    <!-- Home -->
+    <string name="home__title">Anamnesis</string>
+    <string name="home__nav__open">Open navigation drawer</string>
+    <string name="home__nav__close">Close navigation drawer</string>
+    <string name="home__nav__subtitle">Team 4</string>
+    <string name="home__nav__desc">Navigation header</string>
+    <string name="home__nav__settings">Settings</string>
+    <string name="home__new_group__title">New group</string>
+    <string name="home__new_group__hint">Name</string>
+    <string name="home__rename_group__title">Rename group</string>
+    <string name="home__new_group__snackbar">Created group "%1$s"</string>
+    <string name="home__renamed_group__snackbar">Renamed group "%1$s" to "%2$s"</string>
+    <string name="home__deleted_group__snackbar">Deleted group "%1$s"</string>
+    <string name="home__deleted_group__snackbar_action">Undo</string>
+    <string name="home__empty_title">No groups</string>
+    <string name="home__empty_subtitle">Add a group to organize your flashcard decks.</string>
+    <string name="home__item__rename">Rename</string>
+    <string name="home__item__delete">Delete group</string>
 
-    <string name="title_activity_group">Flashcard Deck Group</string>
+    <!-- TextInputDialog component -->
+    <string name="textinputdialog__button__negative">Cancel</string>
+    <string name="textinputdialog__button__positive">OK</string>
 
-    <string name="group_dialog_new_deck_title">New deck</string>
-    <string name="group_dialog_new_group_hint">Name</string>
-    <string name="group_snackbar_new_deck">Created deck "%1$s"</string>
-    <string name="group_snackbar_deleted_deck">Deleted deck "%1$s"</string>
-    <string name="group_empty_title">No flashcard decks</string>
-    <string name="group_empty_subtitle">Add a flashcard deck to start studying a topic.</string>
-    <string name="group_snackbar_edit_success">Saved "%1$s"</string>
-    <string name="item_deck_edit">Edit</string>
-    <string name="item_deck_delete">Delete deck</string>
-    <string name="title_activity_settings">Settings</string>
+    <!-- Group -->
+    <string name="group__new_deck__title">New deck</string>
+    <string name="group__new_deck__hint">Name</string>
+    <string name="group__new_deck__snackbar">Created deck "%1$s"</string>
+    <string name="group__delete_deck__snackbar">Deleted deck "%1$s"</string>
+    <string name="group__empty_title">No flashcard decks</string>
+    <string name="group__empty_subtitle">Add a flashcard deck to start studying a topic.</string>
+    <string name="group__edit__snackbar">Saved "%1$s"</string>
+    <string name="group__item__edit">Edit</string>
+    <string name="group__item__delete">Delete deck</string>
 
-    <!-- Strings related to Settings -->
+    <!-- Settings -->
+    <string name="settings__title">Settings</string>
+    <string name="settings__animations">Enable flashcard animations</string>
+    <string name="settings__font_size">Font size</string>
 
     <!-- Example General settings -->
     <string name="pref_header_general">General</string>
@@ -48,8 +53,15 @@
     <string name="pref_enable_flashcard_animations_description">
     </string>
 
-    <string name="pref_font_size">Font size</string>
-    <string name="pref_font_size_default">12pt</string>
+    <string name="pref__font_size">Font size</string>
+    <string name="pref__font_size__default">12 pt</string>
+    <string-array name="pref__font_size__values">
+        <item>12 pt</item>
+        <item>14 pt</item>
+        <item>16 pt</item>
+        <item>20 pt</item>
+        <item>24 pt</item>
+    </string-array>
 
     <string name="pref_title_add_friends_to_messages">Font size</string>
     <string-array name="pref_example_list_titles">

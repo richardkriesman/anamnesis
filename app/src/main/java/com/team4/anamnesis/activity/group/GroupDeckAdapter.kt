@@ -37,7 +37,7 @@ class GroupDeckAdapter(context: Context): RecyclerView.Adapter<GroupDeckAdapter.
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GroupDeckHolder {
-        val view: View = LayoutInflater.from(c).inflate(R.layout.item_deck, parent, false)
+        val view: View = LayoutInflater.from(c).inflate(R.layout.item__deck, parent, false)
         return GroupDeckHolder(view)
     }
 
@@ -76,7 +76,7 @@ class GroupDeckAdapter(context: Context): RecyclerView.Adapter<GroupDeckAdapter.
                 // handle menu item clicks
                 popupMenu.setOnMenuItemClickListener { menuItem ->
                     when (menuItem.itemId) {
-                        R.id.menU_deck_edit -> {
+                        R.id.menu_deck_edit -> {
                             onDeckEditClicked?.invoke(deck)
                             true
                         }

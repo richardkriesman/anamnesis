@@ -22,7 +22,7 @@ class StudyAdapter(context: AppCompatActivity): RecyclerView.Adapter<StudyAdapte
     private var flashcards: List<Flashcard> = ArrayList() // list of flashcards
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EditDeckHolder {
-        val view: View = LayoutInflater.from(c).inflate(R.layout.item_flashcard_study, parent, false)
+        val view: View = LayoutInflater.from(c).inflate(R.layout.item__card_study, parent, false)
 
         // set width to parent view width
         val params: ViewGroup.LayoutParams = view.layoutParams

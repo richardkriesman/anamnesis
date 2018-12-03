@@ -2,10 +2,12 @@
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.MaterialComponents.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorSecondary">@color/colorSecondary</item>
+        <item name="colorSecondary">@color/colorPrimaryLight</item>
+
+        <item name="windowActionBar">true</item>
+        <item name="windowNoTitle">false</item>
     </style>
 
     <style name="AppTheme.NoActionBar">
@@ -16,5 +18,17 @@
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.MaterialComponents.Dark.ActionBar" />
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.MaterialComponents.Light" />
+
+    <style name="AppTheme.Widget" />
+
+    <style name="AppTheme.Widget.ListItem">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/listItemPrimaryText</item>
+    </style>
+
+    <style name="AppTheme.Widget.ListItem.Secondary">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/listItemSecondaryText</item>
+    </style>
 
 </resources>

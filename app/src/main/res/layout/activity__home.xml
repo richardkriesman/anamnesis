@@ -10,7 +10,7 @@
     tools:openDrawer="start">
 
     <include
-        layout="@layout/app_bar_main"
+        layout="@layout/layout__app_bar"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:visibility="visible" />
@@ -22,7 +22,7 @@
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
         android:visibility="visible"
-        app:headerLayout="@layout/nav_header_main"
+        app:headerLayout="@layout/layout__nav_header"
         app:menu="@menu/activity_main_drawer" />
 
 </androidx.drawerlayout.widget.DrawerLayout>

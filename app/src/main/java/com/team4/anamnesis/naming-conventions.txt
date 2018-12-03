@@ -1,0 +1,23 @@
+Anamnesis
+XML Naming Conventions
+---------------------------
+
+Strings:
+    <where>__<what>__[description]
+
+    where       := activity in which this string resides
+    what        := component in which this string resides
+    description := differentiates multiple strings within an element
+
+Layouts:
+    <what>__<where>
+
+    what  := type of layout - can be activity, content, layout, or item
+    where := where this layout resides
+
+IDs:
+    <where>__<what>__<description>
+
+    where       := which activity this ID resides in
+    what        := type of item
+    description := differentiates multiple items on a single screen

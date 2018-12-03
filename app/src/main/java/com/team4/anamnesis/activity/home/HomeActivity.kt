@@ -27,6 +27,7 @@ import com.team4.anamnesis.db.AppDatabase
 import com.team4.anamnesis.db.entity.Group
 import org.jetbrains.anko.doAsync
 import android.preference.PreferenceActivity
+import com.team4.anamnesis.activity.settings.OldSettingsActivity
 import com.team4.anamnesis.activity.settings.SettingsActivity
 import com.team4.anamnesis.db.viewModel.GroupModel
 
@@ -43,7 +44,7 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_home)
+        setContentView(R.layout.activity__home)
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
 
@@ -67,8 +68,8 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         // instantiate drawer layout
         val drawer = findViewById<DrawerLayout>(R.id.drawer_layout)
         val toggle = ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open,
-                R.string.navigation_drawer_close)
+                this, drawer, toolbar, R.string.home__nav__open,
+                R.string.home__nav__close)
         drawer.addDrawerListener(toggle)
         toggle.syncState()
         navigationView.setNavigationItemSelectedListener(this)
@@ -137,9 +138,9 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }
 
         // show a snackbar about the group being deleted
-        val snackbarText = String.format(resources.getString(R.string.home_snackbar_deleted_group), group.name)
+        val snackbarText = String.format(resources.getString(R.string.home__deleted_group__snackbar), group.name)
         Snackbar.make(recyclerView, snackbarText, Snackbar.LENGTH_LONG)
-                .setAction(R.string.home_snackbar_deleted_group_action) {
+                .setAction(R.string.home__deleted_group__snackbar_action) {
                     doAsync {
                         model.createGroup(group) // user clicked undo button, recreate the group
                     }
@@ -149,8 +150,8 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     fun onCardRenameClicked(group: Group) {
-        val dialog = TextInputDialog(this, R.string.home_dialog_rename_group_title,
-                R.string.home_dialog_new_group_hint)
+        val dialog = TextInputDialog(this, R.string.home__rename_group__title,
+                R.string.home__new_group__hint)
 
         // validate text input when the user taps "Ok"
         dialog.onValidateListener = object : TextInputDialogValidationListener() {
@@ -172,7 +173,7 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 }
 
                 // display a snackbar affirming the new deck was created
-                val snackbarText = String.format(resources.getString(R.string.home_snackbar_renamed_group), oldName,
+                val snackbarText = String.format(resources.getString(R.string.home__renamed_group__snackbar), oldName,
                         text)
                 Snackbar.make(recyclerView, snackbarText, Snackbar.LENGTH_LONG).show()
 
@@ -186,8 +187,8 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     fun onCreateGroupClicked(view: View) {
 
         // prompt the user to name the new group
-        val dialog = TextInputDialog(this@HomeActivity, R.string.home_dialog_new_group_title,
-                R.string.home_dialog_new_group_hint)
+        val dialog = TextInputDialog(this@HomeActivity, R.string.home__new_group__title,
+                R.string.home__new_group__hint)
 
         // validate text input when the user taps "Ok"
         dialog.onValidateListener = object : TextInputDialogValidationListener() {
@@ -208,7 +209,7 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 }
 
                 // display a snackbar affirming the new deck was created
-                val snackbarText = String.format(resources.getString(R.string.home_snackbar_new_group), text)
+                val snackbarText = String.format(resources.getString(R.string.home__new_group__snackbar), text)
                 Snackbar.make(view, snackbarText, Snackbar.LENGTH_LONG).setAction("Action", null).show()
 
             }
@@ -226,8 +227,6 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     fun onDrawerSettingsClick(menuItem: MenuItem) {
         val intent = Intent(this, SettingsActivity::class.java)
-        intent.putExtra(PreferenceActivity.EXTRA_SHOW_FRAGMENT, SettingsActivity.GeneralPreferenceFragment::class.java.name)
-        intent.putExtra(PreferenceActivity.EXTRA_NO_HEADERS, true)
         startActivityFromHome(intent)
     }
 

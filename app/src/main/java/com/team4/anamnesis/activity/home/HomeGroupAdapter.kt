@@ -37,7 +37,7 @@ class HomeGroupAdapter(context: Context): RecyclerView.Adapter<HomeGroupAdapter.
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeGroupHolder {
-        val view: View = LayoutInflater.from(c).inflate(R.layout.item_group, parent, false)
+        val view: View = LayoutInflater.from(c).inflate(R.layout.item__group, parent, false)
         return HomeGroupHolder(view)
     }
 

@@ -7,7 +7,7 @@
         <item
             android:id="@+id/nav_manage"
             android:icon="@drawable/ic_baseline_settings_20px"
-            android:title="@string/drawer_settings"
+            android:title="@string/home__nav__settings"
             android:onClick="onDrawerSettingsClick" />
     </group>
 </menu>

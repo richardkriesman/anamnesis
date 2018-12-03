@@ -37,20 +37,13 @@ class EditDeckActivity : AppCompatActivity() {
     private lateinit var rightButton: ImageView
     private lateinit var scrollIndicator: TextView
 
-    fun closeActivity() {
-        val intent = Intent()
-        intent.putExtra("deck", deck)
-        setResult(RESULT_OK, intent)
-        finish()
-    }
-
     override fun onBackPressed() {
         closeActivity()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_edit_deck)
+        setContentView(R.layout.activity__edit_deck)
         actionBar?.setDisplayHomeAsUpEnabled(true)
 
         // extract deck from intent
@@ -183,7 +176,7 @@ class EditDeckActivity : AppCompatActivity() {
 
         // display a snackbar confirming the deletion
         Snackbar.make(recyclerView, R.string.edit_snackbar_card_deleted, Snackbar.LENGTH_LONG)
-                .setAction(R.string.home_snackbar_deleted_group_action) {
+                .setAction(R.string.home__deleted_group__snackbar_action) {
                     doAsync {
                         model.createFlashcard(flashcard)
                     }
@@ -200,6 +193,13 @@ class EditDeckActivity : AppCompatActivity() {
             }
             else -> super.onOptionsItemSelected(item)
         }
+    }
+
+    private fun closeActivity() {
+        val intent = Intent()
+        intent.putExtra("deck", deck)
+        setResult(RESULT_OK, intent)
+        finish()
     }
 
 }

@@ -5,7 +5,7 @@ import androidx.room.*
 import com.team4.anamnesis.db.entity.Flashcard
 
 @Dao
-interface FlashcardDao {
+interface  FlashcardDao {
 
     @Insert
     fun create(flashcard: Flashcard)

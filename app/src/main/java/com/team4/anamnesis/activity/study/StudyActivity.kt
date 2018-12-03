@@ -45,7 +45,7 @@ class StudyActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_study)
+        setContentView(R.layout.activity__study)
 
         // extract deck from intent
         deck = intent.getSerializableExtra("deck") as Deck

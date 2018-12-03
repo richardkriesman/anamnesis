@@ -4,13 +4,11 @@ import android.os.Bundle
 import android.app.Activity
 import com.team4.anamnesis.R
 
-import kotlinx.android.synthetic.main.activity_results.*
-
 class ResultsActivity : Activity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_results)
+        setContentView(R.layout.activity__results)
         actionBar?.setDisplayHomeAsUpEnabled(true)
     }
 

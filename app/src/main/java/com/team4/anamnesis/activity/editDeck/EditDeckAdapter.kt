@@ -31,7 +31,7 @@ class EditDeckAdapter(context: AppCompatActivity): RecyclerView.Adapter<EditDeck
     var onFlashcardChanged: ((flashcard: Flashcard) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EditDeckHolder {
-        val view: View = LayoutInflater.from(c).inflate(R.layout.item_flashcard_edit, parent, false)
+        val view: View = LayoutInflater.from(c).inflate(R.layout.item__card_edit, parent, false)
 
         // set width to parent view width
         val params: ViewGroup.LayoutParams = view.layoutParams

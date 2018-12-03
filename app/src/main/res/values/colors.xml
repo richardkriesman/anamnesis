@@ -10,6 +10,8 @@
     <color name="colorSecondaryText">#000000</color>
 
     <color name="cardLayoutBackground">#ebebeb</color>
+    <color name="listItemPrimaryText">#de000000</color>
+    <color name="listItemSecondaryText">#99000000</color>
 
     <color name="positive">#12bb35</color>
     <color name="negative">#ba1429</color>
