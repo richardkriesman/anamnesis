@@ -9,10 +9,10 @@ import android.widget.ImageView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.PagerSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.team4.anamnesis.R
 import com.team4.anamnesis.activity.home.HomeActivity
-import com.team4.anamnesis.component.LinearPageHelper
 import com.team4.anamnesis.component.LinearPageLayoutManager
 import com.team4.anamnesis.db.entity.Deck
 import com.team4.anamnesis.db.entity.Flashcard
@@ -66,7 +66,7 @@ class StudyActivity : AppCompatActivity() {
         // instantiate RecyclerView
         recyclerView.adapter = adapter
         recyclerView.layoutManager = manager
-        LinearPageHelper().attachToRecyclerView(recyclerView)
+        PagerSnapHelper().attachToRecyclerView(recyclerView)
 
         // handle RecyclerView page changes
         manager.onPageChange = {

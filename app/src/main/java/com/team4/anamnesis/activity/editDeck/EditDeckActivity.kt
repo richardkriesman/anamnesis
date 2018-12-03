@@ -11,11 +11,11 @@ import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.PagerSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 import com.team4.anamnesis.R
-import com.team4.anamnesis.component.LinearPageHelper
 import com.team4.anamnesis.component.LinearPageLayoutManager
 import com.team4.anamnesis.db.entity.Deck
 import com.team4.anamnesis.db.entity.Flashcard
@@ -93,7 +93,7 @@ class EditDeckActivity : AppCompatActivity() {
         // instantiate RecyclerView
         recyclerView.adapter = adapter
         recyclerView.layoutManager = manager
-        LinearPageHelper().attachToRecyclerView(recyclerView)
+        PagerSnapHelper().attachToRecyclerView(recyclerView)
 
         // handle RecyclerView page changes
         manager.onPageChange = {
@@ -129,46 +129,52 @@ class EditDeckActivity : AppCompatActivity() {
             val currentPosition: Int = manager.currentPosition // save current scroll position to restore later
 
             // update data set
+            val oldSize: Int = adapter.itemCount
+            val isFirstLoad: Boolean = adapter.isFirstLoad
             adapter.setData(it)
 
-            // restore scroll position
-            val newPosition: Int = when {
-                currentPosition < it.size -> currentPosition
-                it.isNotEmpty()           -> it.size - 1
-                else                      -> 0
-            }
-            if (newPosition != currentPosition) {
+            // wait for data set update to complete
+            recyclerView.post {
+
+                // restore scroll position
+                val newPosition: Int = when {
+                    it.size > oldSize && !isFirstLoad -> it.size         // flashcard was added
+                    currentPosition < it.size         -> currentPosition // no change
+                    it.isNotEmpty()                   -> it.size         // flashcard was removed and set is not empty
+                    else                              -> 1               // flashcard was removed and set is empty
+                }
                 recyclerView.smoothScrollToPosition(newPosition)
-            }
 
-            // show/hide empty text if empty
-            if (it.isEmpty()) {
-                emptyTitle.visibility = View.VISIBLE
-                emptySubtitle.visibility = View.VISIBLE
-                leftButton.visibility = View.GONE
-                recyclerView.visibility = View.GONE
-                rightButton.visibility = View.GONE
-                scrollIndicator.visibility = View.GONE
-            } else {
-                emptyTitle.visibility = View.GONE
-                emptySubtitle.visibility = View.GONE
-                leftButton.visibility = View.VISIBLE
-                recyclerView.visibility = View.VISIBLE
-                rightButton.visibility = View.VISIBLE
-                scrollIndicator.visibility = View.VISIBLE
-            }
+                // show/hide empty text if empty
+                if (it.isEmpty()) {
+                    emptyTitle.visibility = View.VISIBLE
+                    emptySubtitle.visibility = View.VISIBLE
+                    leftButton.visibility = View.GONE
+                    recyclerView.visibility = View.GONE
+                    rightButton.visibility = View.GONE
+                    scrollIndicator.visibility = View.GONE
+                } else {
+                    emptyTitle.visibility = View.GONE
+                    emptySubtitle.visibility = View.GONE
+                    leftButton.visibility = View.VISIBLE
+                    recyclerView.visibility = View.VISIBLE
+                    rightButton.visibility = View.VISIBLE
+                    scrollIndicator.visibility = View.VISIBLE
+                }
 
-            // show/hide left/right buttons based on whether there is something to scroll to
-            if (newPosition + 1 >= it.size) {
-                rightButton.visibility = View.GONE
-            }
-            if (newPosition - 1 < 0) {
-                leftButton.visibility = View.GONE
-            }
+                // show/hide left/right buttons based on whether there is something to scroll to
+                if (newPosition + 1 >= it.size) {
+                    rightButton.visibility = View.GONE
+                }
+                if (newPosition - 1 < 0) {
+                    leftButton.visibility = View.GONE
+                }
 
-            // initialize scroll indicator text
-            scrollIndicator.text = String.format(resources.getString(R.string.edit_scroll_indicator_text),
-                    newPosition + 1, it.size)
+                // initialize scroll indicator text
+                scrollIndicator.text = String.format(resources.getString(R.string.edit_scroll_indicator_text),
+                        newPosition + 1, it.size)
+
+            }
         })
 
     }
@@ -181,7 +187,7 @@ class EditDeckActivity : AppCompatActivity() {
             model.createFlashcard(flashcard)
         }
 
-        // display a snackbar confirming the deletion
+        // display a snackbar confirming the creation
         Snackbar.make(recyclerView, R.string.edit_snackbar_card_added, Snackbar.LENGTH_LONG).show()
 
     }

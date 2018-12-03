@@ -15,10 +15,16 @@ import com.team4.anamnesis.db.entity.Flashcard
 
 class EditDeckAdapter(context: AppCompatActivity): RecyclerView.Adapter<EditDeckAdapter.EditDeckHolder>() {
 
+    /**
+     * When this value is false, the first data set has already been loaded.
+     */
+    var isFirstLoad: Boolean = true
+        private set(value) {
+            field = value
+        }
 
     private val c: AppCompatActivity = context
     private var flashcards: List<Flashcard> = ArrayList() // list of flashcards
-    private var isFirstLoad: Boolean = true
 
     /**
      * A listener that fires when the user clicks the "delete" button.
@@ -52,8 +58,9 @@ class EditDeckAdapter(context: AppCompatActivity): RecyclerView.Adapter<EditDeck
     }
 
     fun setData(flashcards: List<Flashcard>) {
+        val isFlashcardAddedOrRemoved: Boolean = this.flashcards.size != flashcards.size
         this.flashcards = flashcards
-        if (isFirstLoad || this.flashcards.size != flashcards.size) { // card was added or removed, reload data set
+        if (isFirstLoad || isFlashcardAddedOrRemoved) { // card was added or removed, reload data set
             isFirstLoad = false
             notifyDataSetChanged()
         }
