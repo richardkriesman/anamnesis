@@ -7,6 +7,7 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -43,8 +44,11 @@ class EditDeckActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity__edit_deck)
-        actionBar?.setDisplayHomeAsUpEnabled(true)
+        setContentView(R.layout.toolbar__edit_deck)
+        val toolbar = findViewById<Toolbar>(R.id.toolbar)
+        setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayShowHomeEnabled(true)
 
         // extract deck from intent
         deck = intent.getSerializableExtra("deck") as Deck
@@ -93,8 +97,21 @@ class EditDeckActivity : AppCompatActivity() {
 
         // handle RecyclerView page changes
         manager.onPageChange = {
-            scrollIndicator.text = String.format(resources.getString(R.string.edit_scroll_indicator_text), it + 1,
-                    adapter.itemCount)
+
+            // update page indicator
+            scrollIndicator.text = String.format(resources.getString(R.string.edit_scroll_indicator_text), it + 1, adapter.itemCount)
+
+            // show/hide left/right buttons based on whether there is something to scroll to
+            if (it + 1 >= (model.flashcards.value?.size ?: 0)) {
+                rightButton.visibility = View.GONE
+            } else {
+                rightButton.visibility = View.VISIBLE
+            }
+            if (it - 1 < 0) {
+                leftButton.visibility = View.GONE
+            } else {
+                leftButton.visibility = View.VISIBLE
+            }
         }
 
         // handle flashcard changes
@@ -139,6 +156,14 @@ class EditDeckActivity : AppCompatActivity() {
                 recyclerView.visibility = View.VISIBLE
                 rightButton.visibility = View.VISIBLE
                 scrollIndicator.visibility = View.VISIBLE
+            }
+
+            // show/hide left/right buttons based on whether there is something to scroll to
+            if (newPosition + 1 >= it.size) {
+                rightButton.visibility = View.GONE
+            }
+            if (newPosition - 1 < 0) {
+                leftButton.visibility = View.GONE
             }
 
             // initialize scroll indicator text

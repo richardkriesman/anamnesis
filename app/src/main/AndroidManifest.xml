@@ -40,6 +40,7 @@
             android:name=".activity.editDeck.EditDeckActivity"
             android:label="@string/title_activity_edit_deck"
             android:parentActivityName=".activity.folder.FolderActivity"
+            android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="adjustResize">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
